@@ -70,3 +70,25 @@ crashlytics-build.properties
 # Temporary auto-generated Android Assets
 /[Aa]ssets/[Ss]treamingAssets/aa.meta
 /[Aa]ssets/[Ss]treamingAssets/aa/*
+
+endymion:~ kdekker$ cat .gitignore_global
+
+*~
+
+.DS_Store
+
+x.x
+
+x.x.meta
+
+Thumbs.db
+
+Desktop.ini
+
+.vs
+
+.vsconfig
+
+*.blend1*
+
+*.blend2*
