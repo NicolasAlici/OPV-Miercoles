@@ -2,20 +2,18 @@ using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 
-public class Player : MonoBehaviour
+public class Player : CustomMethods
 {
     [SerializeField] private float posX = 0f;
     [SerializeField] private float speed = 0f;
     private float dt;
 
-    // Start is called before the first frame update
-    void Start()
+    public override void CustomStart()
     {
         posX = transform.position.x;
     }
 
-    // Update is called once per frame
-    void Update()
+    public override void CustomUpdate()
     {
         dt = Time.deltaTime;
         Movement(dt);

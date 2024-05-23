@@ -3,7 +3,7 @@ using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.VFX;
 
-public class Ball : MonoBehaviour
+public class Ball : CustomMethods
 {
 
     [SerializeField] private float posX = 0f;
@@ -17,15 +17,13 @@ public class Ball : MonoBehaviour
 
     private float dt;
 
-    // Start is called before the first frame update
-    void Start()
+    public override void CustomStart()
     {
         posX = transform.position.x;
         posY = transform.position.y;
     }
 
-    // Update is called once per frame
-    void Update()
+    public override void CustomUpdate()
     {
         dt = Time.deltaTime;
         ApplyGravity();
