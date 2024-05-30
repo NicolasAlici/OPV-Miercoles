@@ -2,17 +2,31 @@ using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 
-public class Collision : MonoBehaviour
+public class Collision : CustomMethods
 {
-    // Start is called before the first frame update
-    void Start()
+    [SerializeField]
+    private GameObject ball;
+    [SerializeField]
+    private GameObject player;
+
+    private Vector3 point;
+
+    public override void CustomStart()
     {
+        base.CustomStart();
+
+        point = new Vector3(0, 0, 0);
+    }
+    public override void CustomUpdate()
+    {
+        base.CustomUpdate();
+
         
     }
 
-    // Update is called once per frame
-    void Update()
+    public void RectPoint()
     {
-        
+
     }
+
 }

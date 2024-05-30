@@ -19,12 +19,14 @@ public class Ball : CustomMethods
 
     public override void CustomStart()
     {
+        base.CustomStart();
         posX = transform.position.x;
         posY = transform.position.y;
     }
 
     public override void CustomUpdate()
     {
+        base.CustomUpdate();
         dt = Time.deltaTime;
         ApplyGravity();
         Movement(dt);

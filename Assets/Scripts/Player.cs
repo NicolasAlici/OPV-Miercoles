@@ -10,11 +10,13 @@ public class Player : CustomMethods
 
     public override void CustomStart()
     {
+        base.CustomStart();
         posX = transform.position.x;
     }
 
     public override void CustomUpdate()
     {
+        base.CustomUpdate();
         dt = Time.deltaTime;
         Movement(dt);
 
