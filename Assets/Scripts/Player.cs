@@ -1,3 +1,5 @@
+using System.Runtime.Serialization;
+using System;
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
@@ -7,7 +9,6 @@ public class Player : CustomMethods
     [SerializeField] private float posX = 0f;
     [SerializeField] private float speed = 0f;
     private float dt;
-
     public override void CustomStart()
     {
         base.CustomStart();
