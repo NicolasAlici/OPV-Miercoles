@@ -12,8 +12,6 @@ public class Ball : CustomMethods
     public float velY = 0f;
     [SerializeField] private float aceX = 0f;
     [SerializeField] private float aceY = 0f;
-    [SerializeField] private float mass = 0f;
-    [SerializeField] private int gravity = 400;
 
     private float dt;
 
@@ -28,7 +26,7 @@ public class Ball : CustomMethods
     {
         base.CustomUpdate();
         dt = Time.deltaTime;
-        //ApplyGravity();
+
         Movement(dt);
 
         transform.position = new Vector3(posX, posY, transform.position.z);
@@ -45,9 +43,4 @@ public class Ball : CustomMethods
         aceX = 0;
         aceY = 0;       
     }
-
-    //public void ApplyGravity()
-    //{
-    //    aceY += gravity / mass;
-    //}
 }

@@ -29,4 +29,12 @@ public class CustomUpdateManager : MonoBehaviour
             methodsList[i].CustomUpdate();
         }
     }
+
+    private void FixedUpdate()
+    {
+        for (int i = 0; i < methodsList.Count; i++)
+        {
+            methodsList[i].CustomFixedUpdate();
+        }
+    }
 }
