@@ -7,7 +7,7 @@ using UnityEngine;
 public class Player : CustomMethods
 {
     [SerializeField] private float posX = 0f;
-    [SerializeField] private float speed = 0f;
+    [SerializeField] private float speed = 10f;
     private float dt;
     public override void CustomStart()
     {
@@ -29,10 +29,12 @@ public class Player : CustomMethods
         if (Input.GetKey(KeyCode.LeftArrow))
         {
             posX -= speed * delta;
+            Debug.Log("To the left");
         }
         if (Input.GetKey(KeyCode.RightArrow))
         {
             posX += speed * delta;
+            Debug.Log("To the right");
         }
     }
 }

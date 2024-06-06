@@ -292,8 +292,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: fdd677c723d28b44a97c28aea5f094c7, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  cubePrefabs:
-  - {fileID: 1590662733760178462, guid: df9b6dbf930b20a4987c34a915ea607e, type: 3}
+  objectPoolers: []
   rows: 6
   columns: 3
   spacingX: 1.8
@@ -313,17 +312,6 @@ Transform:
   m_Children: []
   m_Father: {fileID: 0}
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
---- !u!114 &329531913 stripped
-MonoBehaviour:
-  m_CorrespondingSourceObject: {fileID: 8790107875815703725, guid: ebf689a80bc07b94bb747a2f01d0f096, type: 3}
-  m_PrefabInstance: {fileID: 8285573262414664153}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 0}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: d1a340b321820614f90d275365f95a3c, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
 --- !u!1 &369047418
 GameObject:
   m_ObjectHideFlags: 0
@@ -509,12 +497,11 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   methodsList:
-  - {fileID: 329531913}
+  - {fileID: 8790107875815703725, guid: ebf689a80bc07b94bb747a2f01d0f096, type: 3}
   - {fileID: 8413573890811747347, guid: e380423a03ff84040b7ccc76335fbee6, type: 3}
   - {fileID: 140307465}
   - {fileID: 1235868779}
   - {fileID: 213991736}
-  - {fileID: 0}
 --- !u!1001 &8285573262414664153
 PrefabInstance:
   m_ObjectHideFlags: 0
