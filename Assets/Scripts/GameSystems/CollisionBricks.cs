@@ -1,5 +1,6 @@
 using System.Collections;
 using System.Collections.Generic;
+using Unity.VisualScripting;
 using UnityEngine;
 
 public class CollisionBricks : CustomMethods
@@ -8,6 +9,11 @@ public class CollisionBricks : CustomMethods
     [SerializeField] private BoxCollider ballCollider;
     [SerializeField] private List<BoxCollider> bricks;
     [SerializeField] private List<BoxCollider> noBricks;
+
+    private Vector2 firstVector;
+    private Vector2 secondVector;
+    private Vector2 thirdVector;
+    private Vector2 fourthVector;
 
     public override void CustomStart()
     {
@@ -86,22 +92,30 @@ public class CollisionBricks : CustomMethods
             if (minOverlap == overlapLeft)
             {
                 ball.velX = -Mathf.Abs(ball.velX);
-                ball.transform.position = new Vector2(brick.bounds.min.x - ballCollider.bounds.extents.x, ball.transform.position.y);
+                firstVector.x = brick.bounds.min.x - ballCollider.bounds.extents.x;
+                firstVector.y = ball.transform.position.y;
+                ball.transform.position = firstVector;
             }
             else if (minOverlap == overlapRight)
             {
                 ball.velX = Mathf.Abs(ball.velX);
-                ball.transform.position = new Vector2(brick.bounds.max.x + ballCollider.bounds.extents.x, ball.transform.position.y);
+                secondVector.x = brick.bounds.max.x + ballCollider.bounds.extents.x;
+                secondVector.y = ball.transform.position.y;
+                ball.transform.position = secondVector;
             }
             else if (minOverlap == overlapTop)
             {
                 ball.velY = -Mathf.Abs(ball.velY);
-                ball.transform.position = new Vector2(ball.transform.position.x, brick.bounds.min.y - ballCollider.bounds.extents.y);
+                thirdVector.x = ball.transform.position.x;
+                thirdVector.y = brick.bounds.min.y - ballCollider.bounds.extents.y;
+                ball.transform.position = thirdVector;
             }
             else if (minOverlap == overlapBottom)
             {
                 ball.velY = Mathf.Abs(ball.velY);
-                ball.transform.position = new Vector2(ball.transform.position.x, brick.bounds.max.y + ballCollider.bounds.extents.y);
+                fourthVector.x = ball.transform.position.x;
+                fourthVector.y = brick.bounds.max.y + ballCollider.bounds.extents.y;
+                ball.transform.position = fourthVector;
             }
 
             if (brick.CompareTag("Brick"))
