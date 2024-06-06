@@ -6,12 +6,24 @@ public class CollisionBricks : CustomMethods
 {
     [SerializeField] private Ball ball;
     [SerializeField] private BoxCollider ballCollider;
-    private List<BoxCollider> bricks;
+    [SerializeField] private List<BoxCollider> bricks;
 
     public override void CustomStart()
     {
-        // Find all objects tagged as "Brick" and get their BoxCollider components
+        base.CustomStart();
         bricks = new List<BoxCollider>();
+        GridManager.gridGenerated += UpdateBricks; // Nos suscribimos al evento
+        UpdateBricks(); // Inicializamos por si ya hay bricks en escena
+    }
+
+    void OnDestroy()
+    {
+        GridManager.gridGenerated -= UpdateBricks; // Nos desuscribimos del evento al destruir el objeto
+    }
+
+    private void UpdateBricks()
+    {
+        bricks.Clear(); // Limpiamos la lista antes de actualizar
         GameObject[] brickObjects = GameObject.FindGameObjectsWithTag("Brick");
         Debug.Log("Number of brick objects found: " + brickObjects.Length);
         foreach (GameObject brickObject in brickObjects)
@@ -69,7 +81,7 @@ public class CollisionBricks : CustomMethods
                 ball.transform.position = new Vector2(ball.transform.position.x, brick.bounds.max.y + ballCollider.bounds.extents.y);
             }
 
-            // Optionally destroy the brick or perform other actions
+           
             Destroy(brick.gameObject);
         }
     }
