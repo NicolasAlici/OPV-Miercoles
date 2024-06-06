@@ -7,13 +7,16 @@ public class CollisionBricks : CustomMethods
     [SerializeField] private Ball ball;
     [SerializeField] private BoxCollider ballCollider;
     [SerializeField] private List<BoxCollider> bricks;
+    [SerializeField] private List<BoxCollider> noBricks;
 
     public override void CustomStart()
     {
         base.CustomStart();
         bricks = new List<BoxCollider>();
+        noBricks = new List<BoxCollider>();
         GridManager.gridGenerated += UpdateBricks; // Nos suscribimos al evento
         UpdateBricks(); // Inicializamos por si ya hay bricks en escena
+        UpdateNoBricks();
     }
 
     void OnDestroy()
@@ -25,13 +28,28 @@ public class CollisionBricks : CustomMethods
     {
         bricks.Clear(); // Limpiamos la lista antes de actualizar
         GameObject[] brickObjects = GameObject.FindGameObjectsWithTag("Brick");
-        Debug.Log("Number of brick objects found: " + brickObjects.Length);
+
         foreach (GameObject brickObject in brickObjects)
         {
             BoxCollider brickCollider = brickObject.GetComponent<BoxCollider>();
             if (brickCollider != null)
             {
                 bricks.Add(brickCollider);
+            }
+        }
+    }
+
+    private void UpdateNoBricks()
+    {
+        noBricks.Clear(); // Limpiamos la lista antes de actualizar
+        GameObject[] noBrickObjects = GameObject.FindGameObjectsWithTag("NoBrick");
+
+        foreach (GameObject noBrickObject in noBrickObjects)
+        {
+            BoxCollider noBrickCollider = noBrickObject.GetComponent<BoxCollider>();
+            if (noBrickCollider != null)
+            {
+                noBricks.Add(noBrickCollider);
             }
         }
     }
@@ -43,6 +61,11 @@ public class CollisionBricks : CustomMethods
         foreach (BoxCollider brick in bricks)
         {
             RectCollision(ball, ballCollider, brick);
+        }
+
+        foreach (BoxCollider noBrick in noBricks)
+        {
+            RectCollision(ball, ballCollider, noBrick);
         }
     }
 
@@ -81,8 +104,8 @@ public class CollisionBricks : CustomMethods
                 ball.transform.position = new Vector2(ball.transform.position.x, brick.bounds.max.y + ballCollider.bounds.extents.y);
             }
 
-           
-            Destroy(brick.gameObject);
+            if (brick.CompareTag("Brick"))
+                Destroy(brick.gameObject);
         }
     }
 }
