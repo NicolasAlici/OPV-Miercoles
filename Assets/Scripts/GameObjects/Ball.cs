@@ -32,6 +32,8 @@ public class Ball : CustomMethods
         transform.position = new Vector3(posX, posY, transform.position.z);
     }
 
+    //public override void CustomOnCollisionEnter(Collision other)
+
     public void Movement(float delta)
     {
         velX += aceX * delta;

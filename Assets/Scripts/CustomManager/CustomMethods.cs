@@ -8,4 +8,5 @@ public class CustomMethods : MonoBehaviour
     public virtual void CustomStart() { }
     public virtual void CustomUpdate() { }
     public virtual void CustomFixedUpdate() { }
+    
 }
