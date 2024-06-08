@@ -15,8 +15,6 @@ public class CollisionBricks : CustomMethods
     private Vector2 thirdVector;
     private Vector2 fourthVector;
 
-    private ObjectPoolManager poolManager;
-
     public override void CustomStart()
     {
         base.CustomStart();
@@ -119,9 +117,6 @@ public class CollisionBricks : CustomMethods
                 fourthVector.y = brick.bounds.max.y + ballCollider.bounds.extents.y;
                 ball.transform.position = fourthVector;
             }
-
-            if (brick.CompareTag("Brick"))
-                poolManager.ReturnBrick(gameObject);
         }
     }
 }

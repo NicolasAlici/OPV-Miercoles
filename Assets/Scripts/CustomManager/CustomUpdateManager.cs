@@ -4,7 +4,7 @@ using UnityEngine;
 
 public class CustomUpdateManager : MonoBehaviour
 {
-    [SerializeField] private List<CustomMethods> methodsList;
+    public List<CustomMethods> methodsList;
 
     private void Awake()
     {

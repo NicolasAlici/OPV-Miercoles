@@ -6,7 +6,7 @@ public class BallSpawner : CustomMethods
 {
     [SerializeField] private ObjectPooler objectPooler;
     [SerializeField] private int boostSpawnBalls = 2;
-    private List<GameObject> activeBalls = new List<GameObject>();
+    private List<CustomGameObject> activeBalls = new List<CustomGameObject>();
 
     public override void CustomStart()
     {
@@ -18,14 +18,14 @@ public class BallSpawner : CustomMethods
         //Pelota perdida (ejemplo)
         if (Input.GetKeyDown(KeyCode.L) && activeBalls.Count > 0)
         {
-            GameObject ball = activeBalls[0];
+            CustomGameObject ball = activeBalls[0];
             OnBallLost(ball);
         }
     }
 
     private void SpawnBall()
     {
-        GameObject ball = objectPooler.GetInstanceFromPool();
+        CustomGameObject ball = objectPooler.GetInstanceFromPool();
         ball.transform.position = transform.position;
         ball.SetActive(true);
         activeBalls.Add(ball);
@@ -35,6 +35,7 @@ public class BallSpawner : CustomMethods
     {
         for (int i = 0; i < count; i++)
         {
+            FindObjectOfType<CustomUpdateManager>().methodsList.Add(new CustomGameObject(this.gameObject));
             SpawnBall();
         }
     }
@@ -44,7 +45,7 @@ public class BallSpawner : CustomMethods
         SpawnAdditionalBalls(boostSpawnBalls);
     }
 
-    public void OnBallLost(GameObject ball)
+    public void OnBallLost(CustomGameObject ball)
     {
         objectPooler.ReturnInstanceToPool(ball);
         activeBalls.Remove(ball);

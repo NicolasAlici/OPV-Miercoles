@@ -10,9 +10,6 @@ public class GridManager : CustomMethods
     public int columns = 3;
     public float spacingX = 1.8f; 
     public float spacingY = 1.1f;
-
-    private GameObject _containter;
-
     public static event Action gridGenerated;
 
     public override void CustomStart()
@@ -32,10 +29,10 @@ public class GridManager : CustomMethods
             {
                 Vector3 position = startPosition + new Vector3(i * spacingX, j * spacingY, 0);
                 ObjectPooler pooler = objectPoolers[UnityEngine.Random.Range(0, objectPoolers.Count)];
-                GameObject cube = pooler.GetInstanceFromPool();
-                cube.transform.position = position;
+                CustomGameObject cube = pooler.GetInstanceFromPool();
+                cube.GetGameObject().transform.position = position;
+                FindObjectOfType<CustomUpdateManager>().methodsList.Add(cube);
                 cube.SetActive(true);
-
             }
         }
     }
