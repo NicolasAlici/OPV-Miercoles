@@ -4,12 +4,12 @@ using UnityEngine;
 using UnityEngine.U2D;
 using UnityEngine.UI;
 
-public class spriteFromAtlas : MonoBehaviour
+public class spriteFromAtlas : CustomMethods
 {
     [SerializeField] SpriteAtlas _atlas;
     [SerializeField] string _spriteName;
 
-    void Start()
+    public override void CustomStart()
     {
         GetComponent<Image>().sprite = _atlas.GetSprite(_spriteName);
     }
