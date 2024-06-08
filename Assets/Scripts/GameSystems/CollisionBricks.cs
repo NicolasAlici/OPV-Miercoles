@@ -15,6 +15,8 @@ public class CollisionBricks : CustomMethods
     private Vector2 thirdVector;
     private Vector2 fourthVector;
 
+    private ObjectPoolManager poolManager;
+
     public override void CustomStart()
     {
         base.CustomStart();
@@ -119,7 +121,7 @@ public class CollisionBricks : CustomMethods
             }
 
             if (brick.CompareTag("Brick"))
-                Destroy(brick.gameObject);
+                poolManager.ReturnBrick(gameObject);
         }
     }
 }
