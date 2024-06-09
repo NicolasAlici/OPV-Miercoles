@@ -15,24 +15,26 @@ public class CollisionBricks : CustomMethods
     private Vector2 thirdVector;
     private Vector2 fourthVector;
 
+
+
     public override void CustomStart()
     {
         base.CustomStart();
         bricks = new List<CustomGameObject>();
         noBricks = new List<CustomGameObject>();
-        GridManager.gridGenerated += UpdateBricks; // Nos suscribimos al evento
-        UpdateBricks(); // Inicializamos por si ya hay bricks en escena
+        GridManager.gridGenerated += UpdateBricks; //Nos suscribimos al evento
+        UpdateBricks(); //Inicializamos por si ya hay bricks en escena
         UpdateNoBricks();
     }
 
     void OnDestroy()
     {
-        GridManager.gridGenerated -= UpdateBricks; // Nos desuscribimos del evento al destruir el objeto
+        GridManager.gridGenerated -= UpdateBricks; //Nos desuscribimos del evento al destruir el objeto
     }
 
     private void UpdateBricks()
     {
-        bricks.Clear(); // Limpiamos la lista antes de actualizar
+        bricks.Clear(); //Limpiamos la lista antes de actualizar
         GameObject[] brickObjects = GameObject.FindGameObjectsWithTag("Brick");
 
         foreach (GameObject brickObject in brickObjects)
@@ -47,7 +49,7 @@ public class CollisionBricks : CustomMethods
 
     private void UpdateNoBricks()
     {
-        noBricks.Clear(); // Limpiamos la lista antes de actualizar
+        noBricks.Clear(); //Limpiamos la lista antes de actualizar
         GameObject[] noBrickObjects = GameObject.FindGameObjectsWithTag("NoBrick");
 
         foreach (GameObject noBrickObject in noBrickObjects)
@@ -64,9 +66,20 @@ public class CollisionBricks : CustomMethods
     {
         base.CustomFixedUpdate();
 
+        List<CustomGameObject> bricksToRemove = new List<CustomGameObject>();
+
         foreach (CustomGameObject brick in bricks)
         {
-            RectCollision(ball, ballCollider, brick.GetGameObject().GetComponent<BoxCollider>());
+            if (RectCollision(ball, ballCollider, brick.GetGameObject().GetComponent<BoxCollider>()))
+            {
+                bricksToRemove.Add(brick);
+            }
+        }
+
+        // Remove collided bricks from the list
+        foreach (CustomGameObject brick in bricksToRemove)
+        {
+            bricks.Remove(brick);
         }
 
         foreach (CustomGameObject noBrick in noBricks)
@@ -75,9 +88,9 @@ public class CollisionBricks : CustomMethods
         }
     }
 
-    public void RectCollision(Ball ball, BoxCollider ballCollider, BoxCollider brickCollider)
+    public bool RectCollision(Ball ball, BoxCollider ballCollider, BoxCollider brickCollider)
     {
-        if (brickCollider == null) return;
+        if (brickCollider == null) return false;
 
         if (ballCollider.bounds.max.x >= brickCollider.bounds.min.x &&
             ballCollider.bounds.min.x <= brickCollider.bounds.max.x &&
@@ -94,14 +107,14 @@ public class CollisionBricks : CustomMethods
             if (minOverlap == overlapLeft)
             {
                 ball.velX = -Mathf.Abs(ball.velX);
-                firstVector.x = brickCollider.bounds.min.x - ballCollider.bounds.extents.x;
+                firstVector.x = brickCollider.bounds.min.x - ballCollider.bounds.extents.x - 0.01f; 
                 firstVector.y = ball.transform.position.y;
                 ball.transform.position = firstVector;
             }
             else if (minOverlap == overlapRight)
             {
                 ball.velX = Mathf.Abs(ball.velX);
-                secondVector.x = brickCollider.bounds.max.x + ballCollider.bounds.extents.x;
+                secondVector.x = brickCollider.bounds.max.x + ballCollider.bounds.extents.x + 0.01f; 
                 secondVector.y = ball.transform.position.y;
                 ball.transform.position = secondVector;
             }
@@ -109,16 +122,20 @@ public class CollisionBricks : CustomMethods
             {
                 ball.velY = -Mathf.Abs(ball.velY);
                 thirdVector.x = ball.transform.position.x;
-                thirdVector.y = brickCollider.bounds.min.y - ballCollider.bounds.extents.y;
+                thirdVector.y = brickCollider.bounds.min.y - ballCollider.bounds.extents.y - 0.01f; 
                 ball.transform.position = thirdVector;
             }
             else if (minOverlap == overlapBottom)
             {
                 ball.velY = Mathf.Abs(ball.velY);
                 fourthVector.x = ball.transform.position.x;
-                fourthVector.y = brickCollider.bounds.max.y + ballCollider.bounds.extents.y;
+                fourthVector.y = brickCollider.bounds.max.y + ballCollider.bounds.extents.y + 0.01f; 
                 ball.transform.position = fourthVector;
             }
+
+            return true;
         }
+
+        return false;
     }
 }
