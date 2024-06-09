@@ -1330,7 +1330,7 @@ GameObject:
   m_TagString: NoBrick
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
-  m_StaticEditorFlags: 0
+  m_StaticEditorFlags: 4
   m_IsActive: 1
 --- !u!4 &900644935
 Transform:
@@ -1905,6 +1905,7 @@ MonoBehaviour:
   ballCollider: {fileID: 200702439}
   bricks: []
   noBricks: []
+  bricksToRemove: []
 --- !u!1 &1195119719
 GameObject:
   m_ObjectHideFlags: 0
@@ -2014,7 +2015,7 @@ GameObject:
   m_TagString: NoBrick
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
-  m_StaticEditorFlags: 0
+  m_StaticEditorFlags: 4
   m_IsActive: 1
 --- !u!4 &1294085079
 Transform:
@@ -2480,7 +2481,7 @@ GameObject:
   m_TagString: NoBrick
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
-  m_StaticEditorFlags: 0
+  m_StaticEditorFlags: 4
   m_IsActive: 1
 --- !u!4 &1625451051
 Transform:
