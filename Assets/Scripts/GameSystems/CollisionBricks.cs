@@ -9,13 +9,14 @@ public class CollisionBricks : CustomMethods
     [SerializeField] private BoxCollider ballCollider;
     [SerializeField] private List<CustomGameObject> bricks;
     [SerializeField] private List<CustomGameObject> noBricks;
+    [SerializeField] private List<CustomGameObject> bricksToRemove;
 
     private Vector2 firstVector;
     private Vector2 secondVector;
     private Vector2 thirdVector;
     private Vector2 fourthVector;
 
-
+    
 
     public override void CustomStart()
     {
@@ -65,8 +66,6 @@ public class CollisionBricks : CustomMethods
     public override void CustomFixedUpdate()
     {
         base.CustomFixedUpdate();
-
-        List<CustomGameObject> bricksToRemove = new List<CustomGameObject>();
 
         foreach (CustomGameObject brick in bricks)
         {
