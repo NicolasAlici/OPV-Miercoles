@@ -16,6 +16,7 @@ public class CollisionBricks : CustomMethods
     private Vector2 thirdVector;
     private Vector2 fourthVector;
 
+    private Dictionary<CustomGameObject, Bricks> _bricksDictionary;
     
 
     public override void CustomStart()
@@ -26,6 +27,11 @@ public class CollisionBricks : CustomMethods
         GridManager.gridGenerated += UpdateBricks; //Nos suscribimos al evento
         UpdateBricks(); //Inicializamos por si ya hay bricks en escena
         UpdateNoBricks();
+        _bricksDictionary = new Dictionary<CustomGameObject, Bricks>();
+        for(int i = 0; i < bricks.Count; i++)
+        {
+            _bricksDictionary.Add(bricks[i], bricks[i].gameObject.GetComponent<Bricks>());
+        }
     }
 
     void OnDestroy()
@@ -72,6 +78,7 @@ public class CollisionBricks : CustomMethods
             if (RectCollision(ball, ballCollider, brick.GetGameObject().GetComponent<BoxCollider>()))
             {
                 bricksToRemove.Add(brick);
+                _bricksDictionary[brick].GetHit();
             }
         }
 

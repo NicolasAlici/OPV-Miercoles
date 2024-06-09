@@ -30,11 +30,11 @@ public class Bricks : CustomMethods
         if(Input.GetKeyDown(KeyCode.F))
         {
             Debug.Log($"Damaged - {gameObject.name}");
-            getHit();
+            GetHit();
         }
     }
 
-    public void getHit()
+    public void GetHit()
     {
         currentBallHits++;
         if(currentBallHits >= maxBallHits)
