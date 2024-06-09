@@ -21,7 +21,7 @@ public class Bricks : CustomMethods
     public override void CustomFixedUpdate()
     {
         base.CustomFixedUpdate();
-        var ball = GameObject.FindGameObjectWithTag("Ball").GetComponent<Ball>();
+        //var ball = GameObject.FindGameObjectWithTag("Ball").GetComponent<Ball>();
     }
 
     public override void CustomUpdate()
