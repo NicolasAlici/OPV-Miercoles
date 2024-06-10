@@ -8,20 +8,17 @@ public class Bricks : CustomMethods
     [SerializeField] private int currentBallHits;
 
     private ObjectPooler _pool;
-    private CustomGameObject _customGameObject;
 
-    public override void CustomStart()
+    public override void CustomAwake()
     {
-        base.CustomStart();
+        base.CustomAwake();
         _pool = GetComponent<ObjectPooler>();
-        _customGameObject = new CustomGameObject(this.gameObject);
-        // FindObjectOfType<CustomUpdateManager>().methodsList.Add(_customGameObject);
     }
 
     public override void CustomFixedUpdate()
     {
         base.CustomFixedUpdate();
-        //var ball = GameObject.FindGameObjectWithTag("Ball").GetComponent<Ball>();
+        var ball = GameObject.FindGameObjectWithTag("Ball").GetComponent<Ball>();
     }
 
     public override void CustomUpdate()
@@ -30,11 +27,11 @@ public class Bricks : CustomMethods
         if(Input.GetKeyDown(KeyCode.F))
         {
             Debug.Log($"Damaged - {gameObject.name}");
-            GetHit();
+            getHit();
         }
     }
 
-    public void GetHit()
+    public void getHit()
     {
         currentBallHits++;
         if(currentBallHits >= maxBallHits)
@@ -45,6 +42,7 @@ public class Bricks : CustomMethods
 
     public void DestroyBrick()
     {
-        _pool.ReturnInstanceToPool(_customGameObject);
+        gameObject.SetActive(false);
+        _pool.ReturnInstanceToPool(this.gameObject);
     }
 }

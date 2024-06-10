@@ -5,9 +5,20 @@ using UnityEngine;
 public class CustomUpdateManager : MonoBehaviour
 {
     public List<CustomMethods> methodsList;
+    public static CustomUpdateManager Instance { get; private set; }
 
     private void Awake()
     {
+        if (Instance == null)
+        {
+            Instance = this;
+        }
+        else
+        {
+            Destroy(gameObject);
+            return;
+        }
+
         for (int i = 0; i < methodsList.Count; i++)
         {
             methodsList[i].CustomAwake();
@@ -35,6 +46,13 @@ public class CustomUpdateManager : MonoBehaviour
         for (int i = 0; i < methodsList.Count; i++)
         {
             methodsList[i].CustomFixedUpdate();
+        }
+    }
+    public void AddToMethodsList(CustomMethods customMethods)
+    {
+        if (!methodsList.Contains(customMethods))
+        {
+            methodsList.Add(customMethods);
         }
     }
 }

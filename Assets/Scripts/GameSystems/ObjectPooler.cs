@@ -1,4 +1,4 @@
-using System;
+using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 
@@ -7,15 +7,13 @@ public class ObjectPooler : CustomMethods
     [SerializeField] private GameObject prefab;
     [SerializeField] private int poolSize = 3;
 
-    private List<CustomGameObject> _pool;
-    private CustomGameObject _poolContainer;
-    private CustomUpdateManager _customUpdate;
+    private List<GameObject> _pool;
+    private GameObject _poolContainer;
 
     public override void CustomAwake()
     {
-        _pool = new List<CustomGameObject>();
-        _poolContainer = new CustomGameObject(new GameObject($"Pool - {prefab.name}"));
-        _customUpdate = FindAnyObjectByType<CustomUpdateManager>();
+        _pool = new List<GameObject>();
+        _poolContainer = new GameObject($"Pool - {prefab.name}");
         CreatePooler();
     }
 
@@ -23,17 +21,31 @@ public class ObjectPooler : CustomMethods
     {
         for (int i = 0; i < poolSize; i++)
         {
-            CustomGameObject instance = CreateCustomInstance(prefab, _poolContainer.GetGameObject().transform);
-            _pool.Add(instance);
-            _customUpdate.methodsList.Add(instance);
+            _pool.Add(CreateInstance());
         }
     }
 
-    public CustomGameObject GetInstanceFromPool()
+    private GameObject CreateInstance()
     {
-         for (int i = 0; i < _pool.Count; i++)
+        GameObject newInstance = Instantiate(prefab);
+        newInstance.transform.SetParent(_poolContainer.transform);
+        newInstance.SetActive(false);
+
+        CustomMethods customMethods = newInstance.GetComponent<CustomMethods>();
+        if (customMethods == null)
         {
-            if (!_pool[i].isActive())
+            customMethods = newInstance.AddComponent<CustomMethods>();
+        }
+        CustomUpdateManager.Instance.AddToMethodsList(customMethods);
+
+        return newInstance;
+    }
+
+    public GameObject GetInstanceFromPool()
+    {
+        for (int i = 0; i < _pool.Count; i++)
+        {
+            if (!_pool[i].activeInHierarchy)
             {
                 _pool[i].SetActive(true);
                 return _pool[i];
@@ -41,15 +53,15 @@ public class ObjectPooler : CustomMethods
         }
 
         // Si no hay instancias disponibles en el pool, crea una nueva
-        CustomGameObject newInstance = CreateCustomInstance(prefab, _poolContainer.GetGameObject().transform);
+        GameObject newInstance = CreateInstance();
         newInstance.SetActive(true);
+        
         _pool.Add(newInstance);
-        _customUpdate.methodsList.Add(newInstance);
-
+        
         return newInstance;
     }
 
-    public void ReturnInstanceToPool(CustomGameObject instance)
+    public void ReturnInstanceToPool(GameObject instance)
     {
         instance.SetActive(false);
     }
