@@ -55,4 +55,11 @@ public class CustomUpdateManager : MonoBehaviour
             methodsList.Add(customMethods);
         }
     }
+     public void RemoveFromMethodsList(CustomMethods customMethods)
+    {
+        if (methodsList.Contains(customMethods))
+        {
+            methodsList.Remove(customMethods);
+        }
+    }
 }
