@@ -30,7 +30,7 @@ public class CollisionBricks : CustomMethods
         _bricksDictionary = new Dictionary<CustomGameObject, Bricks>();
         for(int i = 0; i < bricks.Count; i++)
         {
-            _bricksDictionary.Add(bricks[i], bricks[i].gameObject.GetComponent<Bricks>());
+            _bricksDictionary.Add(bricks[i], /* bricks[i].gameObject.GetComponent<Bricks>() */ new Bricks());
         }
     }
 
