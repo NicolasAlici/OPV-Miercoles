@@ -6,13 +6,15 @@ public class Bricks : CustomMethods
 {
     [SerializeField] private int maxBallHits;
     [SerializeField] private int currentBallHits;
+    [SerializeField] private string poolTag;
 
     private ObjectPooler _pool;
 
     public override void CustomAwake()
     {
         base.CustomAwake();
-        _pool = GetComponent<ObjectPooler>();
+        //_pool = GetComponent<ObjectPooler>();
+        _pool = GameObject.FindGameObjectWithTag(poolTag).GetComponent<ObjectPooler>();
     }
 
     public override void CustomFixedUpdate()
@@ -45,6 +47,8 @@ public class Bricks : CustomMethods
 
     public void DestroyBrick(GameObject brick)
     {
+        Debug.Log("BRICK " + brick != null);
+        Debug.Log("PILETAAAAAAAAAAAA " + _pool != null);
         _pool.ReturnInstanceToPool(brick);
     }
 }

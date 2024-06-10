@@ -8,6 +8,9 @@ TagManager:
   - NoBrick
   - Ball
   - CustomUpdate
+  - sPool
+  - mPool
+  - bPool
   layers:
   - Default
   - TransparentFX

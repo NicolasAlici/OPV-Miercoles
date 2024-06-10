@@ -122,7 +122,7 @@ public class CollisionBricks : CustomMethods
                 BoxCollider collidedBrick = RectCollision(ball, ballCollider, brick);
                 if (collidedBrick != null)
                 {
-                    GameObject brickObject;
+                    GameObject brickObject = collidedBrick.gameObject;
                     if (_bricksDictionary.TryGetValue(collidedBrick, out brickObject))
                     {
                         Bricks brickComponent = brickObject.GetComponent<Bricks>();
@@ -131,7 +131,7 @@ public class CollisionBricks : CustomMethods
                             brickComponent.GetHit(brickObject);
                         }
                     }
-                    bricksToRemove.Add(collidedBrick);
+                    //bricksToRemove.Add(collidedBrick);
                 }
             }
         }
@@ -146,11 +146,11 @@ public class CollisionBricks : CustomMethods
         }
 
         // Remove bricks that were collided with
-        foreach (BoxCollider brick in bricksToRemove)
-        {
-            bricks.Remove(brick);
-            Destroy(brick.gameObject);
-        }
+        //foreach (BoxCollider brick in bricksToRemove)
+        //{
+        //    bricks.Remove(brick);
+        //    Destroy(brick.gameObject);
+        //}
     }
 
     public BoxCollider RectCollision(Ball ball, BoxCollider ballCollider, BoxCollider brickCollider)

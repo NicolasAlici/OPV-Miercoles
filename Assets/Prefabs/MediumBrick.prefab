@@ -120,3 +120,4 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   maxBallHits: 2
   currentBallHits: 0
+  poolTag: mPool
