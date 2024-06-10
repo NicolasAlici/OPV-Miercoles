@@ -64,5 +64,10 @@ public class ObjectPooler : CustomMethods
     public void ReturnInstanceToPool(GameObject instance)
     {
         instance.SetActive(false);
+        CustomMethods customMethods = instance.GetComponent<CustomMethods>();
+        if (customMethods != null)
+        {
+            CustomUpdateManager.Instance.RemoveFromMethodsList(customMethods);
+        }
     }
 }
