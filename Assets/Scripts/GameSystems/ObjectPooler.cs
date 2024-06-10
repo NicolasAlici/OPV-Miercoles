@@ -30,7 +30,7 @@ public class ObjectPooler : CustomMethods
         GameObject newInstance = Instantiate(prefab);
         newInstance.transform.SetParent(_poolContainer.transform);
         newInstance.SetActive(false);
-
+        
         CustomMethods customMethods = newInstance.GetComponent<CustomMethods>();
         if (customMethods == null)
         {
