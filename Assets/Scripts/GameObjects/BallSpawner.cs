@@ -8,10 +8,16 @@ public class BallSpawner : CustomMethods
     [SerializeField] private int boostSpawnBalls = 2;
     private List<GameObject> activeBalls = new List<GameObject>();
 
-    public override void CustomStart()
+    public override void CustomAwake()
     {
+        base.CustomAwake();
         SpawnBall();
     }
+
+    //public override void CustomStart()
+    //{
+    //    SpawnBall();
+    //}
 
     public override void CustomUpdate()
     {

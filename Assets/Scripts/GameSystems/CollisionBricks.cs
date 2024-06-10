@@ -5,41 +5,52 @@ using UnityEngine;
 
 public class CollisionBricks : CustomMethods
 {
-    [SerializeField] private Ball ball;
-    [SerializeField] private BoxCollider ballCollider;
+    [SerializeField] private GameObject ballPrefab;
+    [SerializeField] private List<Ball> balls;
+    [SerializeField] private List<BoxCollider> ballColliders;
     [SerializeField] private List<BoxCollider> bricks;
     [SerializeField] private List<BoxCollider> noBricks;
-    [SerializeField] private List<BoxCollider> bricksToRemove;
+
+    private List<BoxCollider> bricksToRemove;
+    private ObjectPooler _pool;
 
     private Vector2 firstVector;
     private Vector2 secondVector;
     private Vector2 thirdVector;
     private Vector2 fourthVector;
 
-    private Dictionary<BoxCollider, Bricks> _bricksDictionary;
+    private Dictionary<BoxCollider, GameObject> _bricksDictionary;
 
     public override void CustomStart()
     {
         base.CustomStart();
         bricks = new List<BoxCollider>();
         noBricks = new List<BoxCollider>();
-        GridManager.gridGenerated += UpdateBricks; // Nos suscribimos al evento
-        UpdateBricks(); // Inicializamos por si ya hay bricks en escena
+        bricksToRemove = new List<BoxCollider>();
+        _bricksDictionary = new Dictionary<BoxCollider, GameObject>();
+        balls = new List<Ball>();
+        ballColliders = new List<BoxCollider>();
+
+        GridManager.gridGenerated += UpdateBricks; // Subscribe to the event
+        UpdateBricks(); // Initialize bricks if already present in the scene
         UpdateNoBricks();
-        for(int i = 0; i < bricks.Count; i++)
+        FindBallInstances(); // Find the ball instances in the scene
+
+        for (int i = 0; i < bricks.Count; i++)
         {
-            _bricksDictionary.Add(bricks[i], new Bricks());
+            GameObject brickObject = bricks[i].gameObject;
+            _bricksDictionary.Add(bricks[i], brickObject);
         }
     }
 
     void OnDestroy()
     {
-        GridManager.gridGenerated -= UpdateBricks; // Nos desuscribimos del evento al destruir el objeto
+        GridManager.gridGenerated -= UpdateBricks; // Unsubscribe from the event
     }
 
     private void UpdateBricks()
     {
-        bricks.Clear(); // Limpiamos la lista antes de actualizar
+        bricks.Clear(); // Clear the list before updating
         GameObject[] brickObjects = GameObject.FindGameObjectsWithTag("Brick");
 
         foreach (GameObject brickObject in brickObjects)
@@ -48,13 +59,14 @@ public class CollisionBricks : CustomMethods
             if (brickCollider != null)
             {
                 bricks.Add(brickCollider);
+                _bricksDictionary[brickCollider] = brickObject;
             }
         }
     }
 
     private void UpdateNoBricks()
     {
-        noBricks.Clear(); // Limpiamos la lista antes de actualizar
+        noBricks.Clear(); // Clear the list before updating
         GameObject[] noBrickObjects = GameObject.FindGameObjectsWithTag("NoBrick");
 
         foreach (GameObject noBrickObject in noBrickObjects)
@@ -67,24 +79,83 @@ public class CollisionBricks : CustomMethods
         }
     }
 
+    private void FindBallInstances()
+    {
+        balls.Clear();
+        ballColliders.Clear();
+        GameObject[] ballObjects = GameObject.FindGameObjectsWithTag("Ball");
+
+        foreach (GameObject ballObject in ballObjects)
+        {
+            Ball ballInstance = ballObject.GetComponent<Ball>();
+            BoxCollider ballColliderInstance = ballObject.GetComponent<BoxCollider>();
+            if (ballInstance != null && ballColliderInstance != null)
+            {
+                balls.Add(ballInstance);
+                ballColliders.Add(ballColliderInstance);
+            }
+        }
+
+        if (balls.Count == 0)
+        {
+            Debug.LogWarning("No ball instances found in the scene!");
+        }
+    }
+
     public override void CustomFixedUpdate()
     {
         base.CustomFixedUpdate();
 
+        if (balls.Count == 0 || ballColliders.Count == 0)
+        {
+            FindBallInstances();
+            if (balls.Count == 0 || ballColliders.Count == 0) return; // Ensure we have valid ball instances
+        }
+
+        bricksToRemove.Clear(); // Clear the list before updating
+
         foreach (BoxCollider brick in bricks)
         {
-            RectCollision(ball, ballCollider, brick.GetComponent<BoxCollider>());
+            foreach (BoxCollider ballCollider in ballColliders)
+            {
+                Ball ball = balls[ballColliders.IndexOf(ballCollider)];
+                BoxCollider collidedBrick = RectCollision(ball, ballCollider, brick);
+                if (collidedBrick != null)
+                {
+                    GameObject brickObject;
+                    if (_bricksDictionary.TryGetValue(collidedBrick, out brickObject))
+                    {
+                        Bricks brickComponent = brickObject.GetComponent<Bricks>();
+                        if (brickComponent != null)
+                        {
+                            brickComponent.GetHit(brickObject);
+                        }
+                    }
+                    bricksToRemove.Add(collidedBrick);
+                }
+            }
         }
 
         foreach (BoxCollider noBrick in noBricks)
         {
-            RectCollision(ball, ballCollider, noBrick.GetComponent<BoxCollider>());
+            foreach (BoxCollider ballCollider in ballColliders)
+            {
+                Ball ball = balls[ballColliders.IndexOf(ballCollider)];
+                RectCollision(ball, ballCollider, noBrick);
+            }
+        }
+
+        // Remove bricks that were collided with
+        foreach (BoxCollider brick in bricksToRemove)
+        {
+            bricks.Remove(brick);
+            Destroy(brick.gameObject);
         }
     }
 
-    public void RectCollision(Ball ball, BoxCollider ballCollider, BoxCollider brickCollider)
+    public BoxCollider RectCollision(Ball ball, BoxCollider ballCollider, BoxCollider brickCollider)
     {
-        if (brickCollider == null) return;
+        if (brickCollider == null) return null;
 
         if (ballCollider.bounds.max.x >= brickCollider.bounds.min.x &&
             ballCollider.bounds.min.x <= brickCollider.bounds.max.x &&
@@ -126,6 +197,9 @@ public class CollisionBricks : CustomMethods
                 fourthVector.y = brickCollider.bounds.max.y + ballCollider.bounds.extents.y;
                 ball.transform.position = fourthVector;
             }
+
+            return brickCollider; // Return the collided brick
         }
+        return null; // No collision
     }
 }

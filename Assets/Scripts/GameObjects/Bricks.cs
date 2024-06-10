@@ -23,25 +23,28 @@ public class Bricks : CustomMethods
     public override void CustomUpdate()
     {
         base.CustomUpdate();
-        if(Input.GetKeyDown(KeyCode.F))
+        if (Input.GetKeyDown(KeyCode.F))
         {
             Debug.Log($"Damaged - {gameObject.name}");
-            getHit();
+            //GetHit();
         }
     }
 
-    public void getHit()
+    public void GetHit(GameObject brick)
     {
-        currentBallHits++;
-        if(currentBallHits >= maxBallHits)
+        Bricks brickComponent = brick.GetComponent<Bricks>();
+        if (brickComponent != null)
         {
-            DestroyBrick();
+            brickComponent.currentBallHits++;
+            if (brickComponent.currentBallHits >= brickComponent.maxBallHits)
+            {
+                DestroyBrick(brick);
+            }
         }
     }
 
-    public void DestroyBrick()
+    public void DestroyBrick(GameObject brick)
     {
-        gameObject.SetActive(false);
-        _pool.ReturnInstanceToPool(this.gameObject);
+        _pool.ReturnInstanceToPool(brick);
     }
 }
