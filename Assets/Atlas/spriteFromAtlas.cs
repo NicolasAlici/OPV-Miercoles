@@ -9,7 +9,7 @@ public class spriteFromAtlas : CustomMethods
     [SerializeField] SpriteAtlas _atlas;
     [SerializeField] string _spriteName;
 
-    public override void CustomStart()
+    private void Start()
     {
         GetComponent<Image>().sprite = _atlas.GetSprite(_spriteName);
     }

@@ -1,0 +1,94 @@
+%YAML 1.1
+%TAG !u! tag:unity3d.com,2011:
+--- !u!687078895 &4343727234628468602
+SpriteAtlas:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_Name: Atlas final
+  m_EditorData:
+    serializedVersion: 2
+    textureSettings:
+      serializedVersion: 2
+      anisoLevel: 1
+      compressionQuality: 50
+      maxTextureSize: 2048
+      textureCompression: 0
+      filterMode: 1
+      generateMipMaps: 0
+      readable: 0
+      crunchedCompression: 0
+      sRGB: 1
+    platformSettings:
+    - serializedVersion: 3
+      m_BuildTarget: DefaultTexturePlatform
+      m_MaxTextureSize: 1024
+      m_ResizeAlgorithm: 0
+      m_TextureFormat: -1
+      m_TextureCompression: 1
+      m_CompressionQuality: 50
+      m_CrunchedCompression: 0
+      m_AllowsAlphaSplitting: 0
+      m_Overridden: 0
+      m_IgnorePlatformSupport: 0
+      m_AndroidETC2FallbackOverride: 0
+      m_ForceMaximumCompressionQuality_BC6H_BC7: 0
+    packingSettings:
+      serializedVersion: 2
+      padding: 4
+      blockOffset: 1
+      allowAlphaSplitting: 0
+      enableRotation: 1
+      enableTightPacking: 1
+      enableAlphaDilation: 0
+    secondaryTextureSettings: {}
+    variantMultiplier: 1
+    packables:
+    - {fileID: 102900000, guid: ed0136357a0585e439ba4ccbed804272, type: 3}
+    bindAsDefault: 1
+    isAtlasV2: 0
+    cachedData: {fileID: 0}
+    packedSpriteRenderDataKeys:
+    - c2b1bd20b64d5d44491510a8fc96c944: 21300000
+    - 628eb360de62dcc4db23d90c800bd380: 21300000
+    - d3e92b62ff9ea9a4baa7dc32e253f9da: 21300000
+    - 6f711ab2301d3b2408fedb857a8c670e: 21300000
+    - 32f1a2f3fe1226c4fbc56c7180633072: 21300000
+    - 6620a0859f4f17d4888123fad18b1d21: 21300000
+    - 597708f66da387a42a1480e3958357f3: 21300000
+    - 1af1d6d96a4381b4a887e330658c245b: 21300000
+    - be1ee81d2c4460143b24f6f502899612: 21300000
+    - db14cb0e2d0826a40b50dc394811526f: 21300000
+    - 6a21a43eb74e10242b292925ccf4586c: 21300000
+    - f42889ffb82f62640997eae7c4cd57b1: 21300000
+  m_MasterAtlas: {fileID: 0}
+  m_PackedSprites:
+  - {fileID: 21300000, guid: c2b1bd20b64d5d44491510a8fc96c944, type: 3}
+  - {fileID: 21300000, guid: 628eb360de62dcc4db23d90c800bd380, type: 3}
+  - {fileID: 21300000, guid: d3e92b62ff9ea9a4baa7dc32e253f9da, type: 3}
+  - {fileID: 21300000, guid: 6f711ab2301d3b2408fedb857a8c670e, type: 3}
+  - {fileID: 21300000, guid: 32f1a2f3fe1226c4fbc56c7180633072, type: 3}
+  - {fileID: 21300000, guid: 6620a0859f4f17d4888123fad18b1d21, type: 3}
+  - {fileID: 21300000, guid: 597708f66da387a42a1480e3958357f3, type: 3}
+  - {fileID: 21300000, guid: 1af1d6d96a4381b4a887e330658c245b, type: 3}
+  - {fileID: 21300000, guid: be1ee81d2c4460143b24f6f502899612, type: 3}
+  - {fileID: 21300000, guid: db14cb0e2d0826a40b50dc394811526f, type: 3}
+  - {fileID: 21300000, guid: 6a21a43eb74e10242b292925ccf4586c, type: 3}
+  - {fileID: 21300000, guid: f42889ffb82f62640997eae7c4cd57b1, type: 3}
+  m_PackedSpriteNamesToIndex:
+  - victory
+  - start
+  - fondo derrota
+  - corazon
+  - exit game
+  - fondo menu
+  - boton
+  - arkanoid
+  - fondo victoria
+  - corazon hueco
+  - main menu
+  - defeat
+  m_RenderDataMap: {}
+  m_Tag: Atlas final
+  m_IsVariant: 0
