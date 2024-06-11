@@ -19,6 +19,12 @@ public class CollisionBricks : CustomMethods
     private Vector2 thirdVector;
     private Vector2 fourthVector;
 
+    //private Vector2 ballPosition;
+    //private Vector2 ballVelocity;
+    //private Vector2 brickPosition;
+    //private Vector2 collisionNormal;
+    //private Vector2 reflectedVelocity;
+
     public override void CustomStart()
     {
         base.CustomStart();
@@ -153,6 +159,10 @@ public class CollisionBricks : CustomMethods
             ballCollider.bounds.max.y >= brickCollider.bounds.min.y &&
             ballCollider.bounds.min.y <= brickCollider.bounds.max.y)
         {
+            //ballPosition = ball.transform.position;
+            //brickPosition = brickCollider.transform.position;
+            //collisionNormal = Vector2.zero;
+
             float overlapLeft = ballCollider.bounds.max.x - brickCollider.bounds.min.x;
             float overlapRight = brickCollider.bounds.max.x - ballCollider.bounds.min.x;
             float overlapTop = ballCollider.bounds.max.y - brickCollider.bounds.min.y;
@@ -160,34 +170,46 @@ public class CollisionBricks : CustomMethods
 
             float minOverlap = Mathf.Min(overlapLeft, overlapRight, overlapTop, overlapBottom);
 
+
             if (minOverlap == overlapLeft)
             {
+                //collisionNormal = Vector2.left;
                 ball.velX = -Mathf.Abs(ball.velX);
-                firstVector.x = brickCollider.bounds.min.x - ballCollider.bounds.extents.x;
+                firstVector.x = brickCollider.bounds.min.x - ballCollider.bounds.extents.x - 0.01f;
                 firstVector.y = ball.transform.position.y;
                 ball.transform.position = firstVector;
             }
             else if (minOverlap == overlapRight)
             {
+                //collisionNormal = Vector2.right;
                 ball.velX = Mathf.Abs(ball.velX);
-                secondVector.x = brickCollider.bounds.max.x + ballCollider.bounds.extents.x;
+                secondVector.x = brickCollider.bounds.max.x + ballCollider.bounds.extents.x + 0.01f;
                 secondVector.y = ball.transform.position.y;
                 ball.transform.position = secondVector;
             }
             else if (minOverlap == overlapTop)
             {
+                //collisionNormal = Vector2.down;
                 ball.velY = -Mathf.Abs(ball.velY);
                 thirdVector.x = ball.transform.position.x;
-                thirdVector.y = brickCollider.bounds.min.y - ballCollider.bounds.extents.y;
+                thirdVector.y = brickCollider.bounds.min.y - ballCollider.bounds.extents.y - 0.01f;
                 ball.transform.position = thirdVector;
             }
             else if (minOverlap == overlapBottom)
             {
+                //collisionNormal = Vector2.up;
                 ball.velY = Mathf.Abs(ball.velY);
                 fourthVector.x = ball.transform.position.x;
-                fourthVector.y = brickCollider.bounds.max.y + ballCollider.bounds.extents.y;
+                fourthVector.y = brickCollider.bounds.max.y + ballCollider.bounds.extents.y + 0.01f;
                 ball.transform.position = fourthVector;
             }
+
+            //ballVelocity.x = ball.velX;
+            //ballVelocity.y = ball.velY;
+            //reflectedVelocity = Vector2.Reflect(ballVelocity, collisionNormal);
+            //ball.velX = reflectedVelocity.x;
+            //ball.velY = reflectedVelocity.y;
+
             Debug.Log(brickCollider.gameObject.name);
             return true; // Return true indicating a collision occurred
         }
@@ -203,6 +225,10 @@ public class CollisionBricks : CustomMethods
             ballCollider.bounds.max.y >= noBrickCollider.bounds.min.y &&
             ballCollider.bounds.min.y <= noBrickCollider.bounds.max.y)
         {
+            //ballPosition = ball.transform.position;
+            //brickPosition = noBrickCollider.transform.position;
+            //collisionNormal = Vector2.zero;
+
             float overlapLeft = ballCollider.bounds.max.x - noBrickCollider.bounds.min.x;
             float overlapRight = noBrickCollider.bounds.max.x - ballCollider.bounds.min.x;
             float overlapTop = ballCollider.bounds.max.y - noBrickCollider.bounds.min.y;
@@ -210,8 +236,11 @@ public class CollisionBricks : CustomMethods
 
             float minOverlap = Mathf.Min(overlapLeft, overlapRight, overlapTop, overlapBottom);
 
+            //Debug.Log($"Ball Position Before: {ballPosition}, Velocity: ({ball.velX}, {ball.velY})");
+
             if (minOverlap == overlapLeft)
             {
+                //collisionNormal = Vector2.left;
                 ball.velX = -Mathf.Abs(ball.velX);
                 firstVector.x = noBrickCollider.bounds.min.x - ballCollider.bounds.extents.x - 0.01f;
                 firstVector.y = ball.transform.position.y;
@@ -219,6 +248,7 @@ public class CollisionBricks : CustomMethods
             }
             else if (minOverlap == overlapRight)
             {
+                //collisionNormal = Vector2.right;
                 ball.velX = Mathf.Abs(ball.velX);
                 secondVector.x = noBrickCollider.bounds.max.x + ballCollider.bounds.extents.x + 0.01f;
                 secondVector.y = ball.transform.position.y;
@@ -226,6 +256,7 @@ public class CollisionBricks : CustomMethods
             }
             else if (minOverlap == overlapTop)
             {
+                //collisionNormal = Vector2.down;
                 ball.velY = -Mathf.Abs(ball.velY);
                 thirdVector.x = ball.transform.position.x;
                 thirdVector.y = noBrickCollider.bounds.min.y - ballCollider.bounds.extents.y - 0.01f;
@@ -233,11 +264,20 @@ public class CollisionBricks : CustomMethods
             }
             else if (minOverlap == overlapBottom)
             {
+                //collisionNormal = Vector2.up;
                 ball.velY = Mathf.Abs(ball.velY);
                 fourthVector.x = ball.transform.position.x;
                 fourthVector.y = noBrickCollider.bounds.max.y + ballCollider.bounds.extents.y + 0.01f;
                 ball.transform.position = fourthVector;
             }
+
+            //ballVelocity.x = ball.velX;
+            //ballVelocity.y = ball.velY;
+            //reflectedVelocity = Vector2.Reflect(ballVelocity, collisionNormal);
+            //ball.velX = reflectedVelocity.x;
+            //ball.velY = reflectedVelocity.y;
+
+            //Debug.Log($"Ball Position After: {ball.transform.position}, Velocity: ({ball.velX}, {ball.velY})");
         }
     }
 }

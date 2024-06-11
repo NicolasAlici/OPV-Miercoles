@@ -8,11 +8,14 @@ public class Player : CustomMethods
 {
     [SerializeField] private float posX = 0f;
     [SerializeField] private float speed = 10f;
+
     private float dt;
+    private Vector2 newPos;
     public override void CustomStart()
     {
         base.CustomStart();
         posX = transform.position.x;
+        newPos = transform.position;
     }
 
     public override void CustomUpdate()
@@ -21,7 +24,10 @@ public class Player : CustomMethods
         dt = Time.deltaTime;
         Movement(dt);
 
-        transform.position = new Vector3(posX, transform.position.y, transform.position.z);
+        newPos.x = posX;
+        newPos.y = transform.position.y;
+
+        transform.position = newPos;
     }
 
     public void Movement(float delta)
@@ -29,12 +35,10 @@ public class Player : CustomMethods
         if (Input.GetKey(KeyCode.LeftArrow))
         {
             posX -= speed * delta;
-            Debug.Log("To the left");
         }
         if (Input.GetKey(KeyCode.RightArrow))
         {
             posX += speed * delta;
-            Debug.Log("To the right");
         }
     }
 }
