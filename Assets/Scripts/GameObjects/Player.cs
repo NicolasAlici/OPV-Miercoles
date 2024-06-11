@@ -10,14 +10,16 @@ public class Player : CustomMethods
     [SerializeField] private float speed = 10f;
     [SerializeField] private float minX;
     [SerializeField] private float maxX;
-    public int maxBallsLost = 3;
+    public int maxBallsLost;
     public int currentBallsLost;
 
     private float dt;
     private Vector2 newPos;
+    private GameManager gameManager;
     public override void CustomStart()
     {
         base.CustomStart();
+        gameManager = GetComponent<GameManager>();
         posX = transform.position.x;
         newPos = transform.position;
     }
@@ -35,7 +37,8 @@ public class Player : CustomMethods
 
         if(currentBallsLost >= maxBallsLost)
         {
-            gameObject.SetActive(false);
+            gameManager.gameLose();
+            gameObject.SetActive(false); 
         }
     }
 

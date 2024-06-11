@@ -762,6 +762,10 @@ PrefabInstance:
       propertyPath: speed
       value: 8
       objectReference: {fileID: 0}
+    - target: {fileID: 8790107875815703725, guid: ebf689a80bc07b94bb747a2f01d0f096, type: 3}
+      propertyPath: maxBallsLost
+      value: 1
+      objectReference: {fileID: 0}
     - target: {fileID: 9189054435867471842, guid: ebf689a80bc07b94bb747a2f01d0f096, type: 3}
       propertyPath: m_LocalPosition.x
       value: 0
@@ -862,6 +866,8 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 556874cab81ed7e479e5f8b7df0916ec, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  winCanvas: {fileID: 2120245610}
+  loseCanvas: {fileID: 558818221}
 --- !u!1 &421121931
 GameObject:
   m_ObjectHideFlags: 0
@@ -1463,7 +1469,7 @@ GameObject:
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
-  m_IsActive: 0
+  m_IsActive: 1
 --- !u!4 &746293108
 Transform:
   m_ObjectHideFlags: 0
@@ -2751,6 +2757,7 @@ MonoBehaviour:
   - {fileID: 1942444496}
   - {fileID: 791853838}
   - {fileID: 1242600106}
+  - {fileID: 746293109}
 --- !u!1 &1474305522
 GameObject:
   m_ObjectHideFlags: 0

@@ -9,12 +9,14 @@ public class Bricks : CustomMethods
     [SerializeField] private string poolTag;
 
     private ObjectPooler _pool;
+    private GameManager gameManager;
 
     public override void CustomAwake()
     {
         base.CustomAwake();
         //_pool = GetComponent<ObjectPooler>();
         _pool = GameObject.FindGameObjectWithTag(poolTag).GetComponent<ObjectPooler>();
+        gameManager = GetComponent<GameManager>();
     }
 
     public override void CustomFixedUpdate()
@@ -50,5 +52,9 @@ public class Bricks : CustomMethods
         Debug.Log("BRICK " + brick != null);
         Debug.Log("PILETAAAAAAAAAAAA " + _pool != null);
         _pool.ReturnInstanceToPool(brick);
+        if(brick == null)
+        {
+
+        }
     }
 }
