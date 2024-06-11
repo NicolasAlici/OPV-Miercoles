@@ -13,6 +13,7 @@ public class Ball : CustomMethods
     [SerializeField] private float aceX = 0f;
     [SerializeField] private float aceY = 0f;
 
+    private Vector2 newPos;
     private float dt;
 
     public override void CustomStart()
@@ -20,6 +21,8 @@ public class Ball : CustomMethods
         base.CustomStart();
         posX = transform.position.x;
         posY = transform.position.y;
+
+        newPos = transform.position;
     }
 
     public override void CustomUpdate()
@@ -29,7 +32,9 @@ public class Ball : CustomMethods
 
         Movement(dt);
 
-        transform.position = new Vector3(posX, posY, transform.position.z);
+        newPos.x = posX;
+        newPos.y = posY;
+        transform.position = newPos;
     }
 
     public void Movement(float delta)
