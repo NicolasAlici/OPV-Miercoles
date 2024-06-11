@@ -537,6 +537,14 @@ PrefabInstance:
       value: Player
       objectReference: {fileID: 0}
     - target: {fileID: 8790107875815703725, guid: ebf689a80bc07b94bb747a2f01d0f096, type: 3}
+      propertyPath: maxX
+      value: 8.752
+      objectReference: {fileID: 0}
+    - target: {fileID: 8790107875815703725, guid: ebf689a80bc07b94bb747a2f01d0f096, type: 3}
+      propertyPath: minX
+      value: -8.881
+      objectReference: {fileID: 0}
+    - target: {fileID: 8790107875815703725, guid: ebf689a80bc07b94bb747a2f01d0f096, type: 3}
       propertyPath: posX
       value: 0
       objectReference: {fileID: 0}

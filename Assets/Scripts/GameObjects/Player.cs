@@ -8,6 +8,8 @@ public class Player : CustomMethods
 {
     [SerializeField] private float posX = 0f;
     [SerializeField] private float speed = 10f;
+    [SerializeField] private float minX;
+    [SerializeField] private float maxX;
 
     private float dt;
     private Vector2 newPos;
@@ -40,5 +42,7 @@ public class Player : CustomMethods
         {
             posX += speed * delta;
         }
+
+        posX = Mathf.Clamp(posX, minX, maxX);
     }
 }
