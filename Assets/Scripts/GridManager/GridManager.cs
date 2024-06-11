@@ -6,6 +6,7 @@ using UnityEngine;
 public class GridManager : CustomMethods
 {
     [SerializeField] private List<ObjectPooler> objectPoolers;
+    [SerializeField] private GameObject brickPrefab;
     public int rows = 6;
     public int columns = 3;
     public float spacingX = 1.8f; 
@@ -18,6 +19,8 @@ public class GridManager : CustomMethods
         base.CustomStart();
         CreateGrid();
         gridGenerated?.Invoke();
+        GameObject[] brickObjects = GameObject.FindGameObjectsWithTag("Brick");
+        StaticBatchingUtility.Combine(brickObjects, brickPrefab);
     }
 
     void CreateGrid()

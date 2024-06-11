@@ -1124,6 +1124,7 @@ MonoBehaviour:
   - {fileID: 1353700865}
   - {fileID: 1195119721}
   - {fileID: 1942444496}
+  brickPrefab: {fileID: 1590662733760178462, guid: e4b321bc751069949b82107be27b3da8, type: 3}
   rows: 6
   columns: 3
   spacingX: 1.8
@@ -1789,6 +1790,7 @@ MonoBehaviour:
   ballColliders: []
   bricks: []
   noBricks: []
+  bricksToRemove: []
 --- !u!1 &1195119719
 GameObject:
   m_ObjectHideFlags: 0
