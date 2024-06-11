@@ -204,12 +204,6 @@ public class CollisionBricks : CustomMethods
                 ball.transform.position = fourthVector;
             }
 
-            //ballVelocity.x = ball.velX;
-            //ballVelocity.y = ball.velY;
-            //reflectedVelocity = Vector2.Reflect(ballVelocity, collisionNormal);
-            //ball.velX = reflectedVelocity.x;
-            //ball.velY = reflectedVelocity.y;
-
             Debug.Log(brickCollider.gameObject.name);
             return true; // Return true indicating a collision occurred
         }
@@ -225,18 +219,12 @@ public class CollisionBricks : CustomMethods
             ballCollider.bounds.max.y >= noBrickCollider.bounds.min.y &&
             ballCollider.bounds.min.y <= noBrickCollider.bounds.max.y)
         {
-            //ballPosition = ball.transform.position;
-            //brickPosition = noBrickCollider.transform.position;
-            //collisionNormal = Vector2.zero;
-
             float overlapLeft = ballCollider.bounds.max.x - noBrickCollider.bounds.min.x;
             float overlapRight = noBrickCollider.bounds.max.x - ballCollider.bounds.min.x;
             float overlapTop = ballCollider.bounds.max.y - noBrickCollider.bounds.min.y;
             float overlapBottom = noBrickCollider.bounds.max.y - ballCollider.bounds.min.y;
 
             float minOverlap = Mathf.Min(overlapLeft, overlapRight, overlapTop, overlapBottom);
-
-            //Debug.Log($"Ball Position Before: {ballPosition}, Velocity: ({ball.velX}, {ball.velY})");
 
             if (minOverlap == overlapLeft)
             {
@@ -270,14 +258,6 @@ public class CollisionBricks : CustomMethods
                 fourthVector.y = noBrickCollider.bounds.max.y + ballCollider.bounds.extents.y + 0.01f;
                 ball.transform.position = fourthVector;
             }
-
-            //ballVelocity.x = ball.velX;
-            //ballVelocity.y = ball.velY;
-            //reflectedVelocity = Vector2.Reflect(ballVelocity, collisionNormal);
-            //ball.velX = reflectedVelocity.x;
-            //ball.velY = reflectedVelocity.y;
-
-            //Debug.Log($"Ball Position After: {ball.transform.position}, Velocity: ({ball.velX}, {ball.velY})");
         }
     }
 }

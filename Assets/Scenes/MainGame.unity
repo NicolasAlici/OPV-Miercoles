@@ -758,6 +758,10 @@ PrefabInstance:
       propertyPath: posX
       value: 0
       objectReference: {fileID: 0}
+    - target: {fileID: 8790107875815703725, guid: ebf689a80bc07b94bb747a2f01d0f096, type: 3}
+      propertyPath: speed
+      value: 8
+      objectReference: {fileID: 0}
     - target: {fileID: 9189054435867471842, guid: ebf689a80bc07b94bb747a2f01d0f096, type: 3}
       propertyPath: m_LocalPosition.x
       value: 0
@@ -2415,7 +2419,7 @@ Transform:
   m_GameObject: {fileID: 1242600104}
   serializedVersion: 2
   m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
-  m_LocalPosition: {x: 0, y: 5.05, z: 0}
+  m_LocalPosition: {x: 0, y: 0.146, z: 0}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_ConstrainProportionsScale: 0
   m_Children: []
@@ -2435,6 +2439,8 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   objectPooler: {fileID: 1774973746}
   boostSpawnBalls: 2
+  launchKey: 32
+  player: {fileID: 293364022}
 --- !u!1 &1294085078
 GameObject:
   m_ObjectHideFlags: 0

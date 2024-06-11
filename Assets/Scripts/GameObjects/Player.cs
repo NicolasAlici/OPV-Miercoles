@@ -10,6 +10,8 @@ public class Player : CustomMethods
     [SerializeField] private float speed = 10f;
     [SerializeField] private float minX;
     [SerializeField] private float maxX;
+    public int maxBallsLost = 3;
+    public int currentBallsLost;
 
     private float dt;
     private Vector2 newPos;
@@ -30,6 +32,11 @@ public class Player : CustomMethods
         newPos.y = transform.position.y;
 
         transform.position = newPos;
+
+        if(currentBallsLost >= maxBallsLost)
+        {
+            gameObject.SetActive(false);
+        }
     }
 
     public void Movement(float delta)

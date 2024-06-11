@@ -30,7 +30,7 @@ Transform:
   m_GameObject: {fileID: 8846561051536306089}
   serializedVersion: 2
   m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
-  m_LocalPosition: {x: -2.01, y: -2651.3096, z: 0}
+  m_LocalPosition: {x: -2.01, y: 0, z: 0}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_ConstrainProportionsScale: 0
   m_Children: []
@@ -102,8 +102,12 @@ MonoBehaviour:
   posY: -2651.3096
   velX: 0
   velY: -10
+  player: {fileID: 8790107875815703725, guid: ebf689a80bc07b94bb747a2f01d0f096, type: 3}
   aceX: 0
   aceY: 0
+  initialVelocityX: 5
+  initialVelocityY: 5
+  loseYPosition: -5
 --- !u!65 &705816186968136287
 BoxCollider:
   m_ObjectHideFlags: 0
