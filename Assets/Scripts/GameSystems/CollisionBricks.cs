@@ -114,12 +114,12 @@ public class CollisionBricks : CustomMethods
 
         bricksToRemove.Clear(); // Clear the list before updating
 
-        foreach (BoxCollider brick in bricks)
+        for (int i = bricks.Count - 1; i >= 0; i--)
         {
-            foreach (BoxCollider ballCollider in ballColliders)
+            for (int j = ballColliders.Count - 1; j >= 0; j--)
             {
-                Ball ball = balls[ballColliders.IndexOf(ballCollider)];
-                BoxCollider collidedBrick = RectCollision(ball, ballCollider, brick);
+                Ball ball = balls[ballColliders.IndexOf(ballColliders[j])];
+                BoxCollider collidedBrick = RectCollision(ball, ballColliders[j], bricks[i]);
                 if (collidedBrick != null)
                 {
                     GameObject brickObject = collidedBrick.gameObject;
@@ -134,7 +134,9 @@ public class CollisionBricks : CustomMethods
                     //bricksToRemove.Add(collidedBrick);
                 }
             }
-        }
+            
+        } 
+
 
         foreach (BoxCollider noBrick in noBricks)
         {
@@ -197,7 +199,7 @@ public class CollisionBricks : CustomMethods
                 fourthVector.y = brickCollider.bounds.max.y + ballCollider.bounds.extents.y;
                 ball.transform.position = fourthVector;
             }
-
+            Debug.Log(brickCollider.gameObject.name);
             return brickCollider; // Return the collided brick
         }
         return null; // No collision
