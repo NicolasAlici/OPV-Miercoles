@@ -11,6 +11,7 @@ TagManager:
   - sPool
   - mPool
   - bPool
+  - PowerUp
   layers:
   - Default
   - TransparentFX

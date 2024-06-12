@@ -7,21 +7,21 @@ public class CollisionBricks : CustomMethods
 {
     [SerializeField] private GameObject ballPrefab;
     [SerializeField] private List<Ball> balls;
+    [SerializeField] private List<MultiBallPowerUp> powerUp;
     [SerializeField] private List<BoxCollider> ballColliders;
     [SerializeField] private List<BoxCollider> bricks;
     public List<BoxCollider> noBricks;
     [SerializeField] private List<BoxCollider> bricksToRemove;
     [SerializeField] private List<BoxCollider> powerUpCollider;
     [SerializeField] private List<BoxCollider> powerUpToRemove;
-    [SerializeField] private List<BoxCollider> player;   
+    [SerializeField] private BoxCollider player;   
     private Dictionary<BoxCollider, GameObject> _bricksDictionary;
+    private Dictionary<BoxCollider, GameObject> _powerUpDictionary;
 
     private Vector2 firstVector;
     private Vector2 secondVector;
     private Vector2 thirdVector;
     private Vector2 fourthVector;
-
-    private BallSpawner _ballSpawner;
 
     public override void CustomStart()
     {
@@ -31,21 +31,28 @@ public class CollisionBricks : CustomMethods
         bricksToRemove = new List<BoxCollider>();
         powerUpCollider = new List<BoxCollider>();
         powerUpToRemove = new List<BoxCollider>();
-        player = new List<BoxCollider>();   
         _bricksDictionary = new Dictionary<BoxCollider, GameObject>();
+        _powerUpDictionary = new Dictionary<BoxCollider, GameObject>();
         balls = new List<Ball>();
+        powerUp = new List<MultiBallPowerUp>();
         ballColliders = new List<BoxCollider>();
-        _ballSpawner = FindObjectOfType<BallSpawner>();
 
         GridManager.gridGenerated += UpdateBricks;
         UpdateBricks();
         UpdateNoBricks();
         FindBallInstances();
+        FindPowerUpInstances();
 
         for (int i = 0; i < bricks.Count; i++)
         {
             GameObject brickObject = bricks[i].gameObject;
             _bricksDictionary.Add(bricks[i], brickObject);
+        }
+
+        for (int i = 0; i < powerUpCollider.Count; i++)
+        {
+            GameObject powerUpObject = powerUpCollider[i].gameObject;
+            _powerUpDictionary.Add(powerUpCollider[i], powerUpObject);
         }
     }
 
@@ -98,6 +105,24 @@ public class CollisionBricks : CustomMethods
         }
     }
 
+    private void FindPowerUpInstances()
+    {
+        powerUp.Clear();
+        powerUpCollider.Clear();
+        GameObject[] powerUpObjects = GameObject.FindGameObjectsWithTag("PowerUp");
+
+        foreach (GameObject powerUpObject in powerUpObjects)
+        {
+            MultiBallPowerUp powerUpInstance = powerUpObject.GetComponent<MultiBallPowerUp>();
+            BoxCollider powerUpColliderInstance = powerUpObject.GetComponent<BoxCollider>();
+            if (powerUpInstance != null && powerUpColliderInstance != null)
+            {
+                powerUp.Add(powerUpInstance);
+                powerUpCollider.Add(powerUpColliderInstance);
+            }
+        }
+    }
+
     public override void CustomFixedUpdate()
     {
         base.CustomFixedUpdate();
@@ -109,7 +134,15 @@ public class CollisionBricks : CustomMethods
             if (balls.Count == 0 || ballColliders.Count == 0) return;
         }
 
+        FindPowerUpInstances();
+        if (powerUp.Count == 0 || powerUpCollider.Count == 0)
+        {
+            FindBallInstances();
+            if (powerUp.Count == 0 || powerUpCollider.Count == 0) return;
+        }
+
         bricksToRemove.Clear();
+        powerUpToRemove.Clear();
 
         foreach (BoxCollider brick in bricks)
         {
@@ -143,6 +176,28 @@ public class CollisionBricks : CustomMethods
                 if (brickComponent != null)
                 {
                     brickComponent.DestroyBrick(brickObject);
+                }
+            }
+        }
+
+        
+        foreach (BoxCollider powerUpCol in powerUpCollider)
+        {
+            if (RectCollisionPowerUp(powerUpCol, player))
+            {
+                powerUpToRemove.Add(powerUpCol);
+            }
+        }
+
+        foreach (BoxCollider powerUpCol in powerUpToRemove)
+        {
+            powerUpCollider.Remove(powerUpCol);
+            if (_powerUpDictionary.TryGetValue(powerUpCol, out GameObject powerUpObject))
+            {
+                MultiBallPowerUp powerUpComponent = powerUpObject.GetComponent<MultiBallPowerUp>();
+                if (powerUpComponent != null)
+                {
+                    powerUpComponent.RemovePowerUp(powerUpObject);
                 }
             }
         }
@@ -255,13 +310,18 @@ public class CollisionBricks : CustomMethods
         }
     }
 
-    public void SpawnMultiBalls()
+    private bool RectCollisionPowerUp(BoxCollider powerUpCollider, BoxCollider playerCollider)
     {
-        if (_ballSpawner != null)
+        if (powerUpCollider == null) return false;
+
+        if (playerCollider.bounds.max.x >= powerUpCollider.bounds.min.x &&
+            playerCollider.bounds.min.x <= powerUpCollider.bounds.max.x &&
+            playerCollider.bounds.max.y >= powerUpCollider.bounds.min.y &&
+            playerCollider.bounds.min.y <= powerUpCollider.bounds.max.y)
         {
-            _ballSpawner.launchMultiBall = true;
-            _ballSpawner.OnBallCollectedBoost();
+            return true;
         }
+        return false;
     }
 }
 

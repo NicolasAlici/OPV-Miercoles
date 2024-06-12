@@ -16,14 +16,6 @@ public class Bricks : CustomMethods
         base.CustomAwake();
         gameManager = GetComponent<GameManager>();
     }
-    public override void CustomUpdate()
-    {
-        base.CustomUpdate();
-        if (Input.GetKeyDown(KeyCode.F))
-        {
-            //GetHit();
-        }
-    }
 
     public void GetHit(GameObject brick)
     {
