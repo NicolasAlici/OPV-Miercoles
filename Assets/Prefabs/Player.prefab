@@ -98,10 +98,13 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: d1a340b321820614f90d275365f95a3c, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  posX: 7.321718
-  speed: 5
-  minX: 0
-  maxX: 0
+  posX: 0
+  speed: 8
+  minX: -8.881
+  maxX: 8.752
+  _gameManager: {fileID: 0}
+  maxBallsLost: 3
+  currentBallsLost: 0
 --- !u!65 &7763359574734133293
 BoxCollider:
   m_ObjectHideFlags: 0

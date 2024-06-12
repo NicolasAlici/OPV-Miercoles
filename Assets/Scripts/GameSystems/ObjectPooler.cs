@@ -48,6 +48,12 @@ public class ObjectPooler : CustomMethods
             if (!_pool[i].activeInHierarchy)
             {
                 _pool[i].SetActive(true);
+                CustomMethods customMethods = _pool[i].GetComponent<CustomMethods>();
+                if (customMethods == null)
+                {
+                    customMethods = _pool[i].AddComponent<CustomMethods>();
+                }
+                CustomUpdateManager.Instance.AddToMethodsList(customMethods);
                 return _pool[i];
             }
         }

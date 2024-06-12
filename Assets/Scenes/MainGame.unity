@@ -751,25 +751,9 @@ PrefabInstance:
       value: 2
       objectReference: {fileID: 0}
     - target: {fileID: 8790107875815703725, guid: ebf689a80bc07b94bb747a2f01d0f096, type: 3}
-      propertyPath: maxX
-      value: 8.752
-      objectReference: {fileID: 0}
-    - target: {fileID: 8790107875815703725, guid: ebf689a80bc07b94bb747a2f01d0f096, type: 3}
-      propertyPath: minX
-      value: -8.881
-      objectReference: {fileID: 0}
-    - target: {fileID: 8790107875815703725, guid: ebf689a80bc07b94bb747a2f01d0f096, type: 3}
-      propertyPath: posX
-      value: 0
-      objectReference: {fileID: 0}
-    - target: {fileID: 8790107875815703725, guid: ebf689a80bc07b94bb747a2f01d0f096, type: 3}
-      propertyPath: speed
-      value: 8
-      objectReference: {fileID: 0}
-    - target: {fileID: 8790107875815703725, guid: ebf689a80bc07b94bb747a2f01d0f096, type: 3}
-      propertyPath: maxBallsLost
-      value: 1
-      objectReference: {fileID: 0}
+      propertyPath: _gameManager
+      value: 
+      objectReference: {fileID: 358873490}
     - target: {fileID: 9189054435867471842, guid: ebf689a80bc07b94bb747a2f01d0f096, type: 3}
       propertyPath: m_LocalPosition.x
       value: -0.13
@@ -1150,7 +1134,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 0cd44c1031e13a943bb63640046fad76, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  m_UiScaleMode: 0
+  m_UiScaleMode: 1
   m_ReferencePixelsPerUnit: 100
   m_ScaleFactor: 1
   m_ReferenceResolution: {x: 800, y: 600}
@@ -3307,7 +3291,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   prefab: {fileID: 8846561051536306089, guid: e380423a03ff84040b7ccc76335fbee6, type: 3}
-  poolSize: 3
+  poolSize: 1
 --- !u!1 &1797841905
 GameObject:
   m_ObjectHideFlags: 0
@@ -3801,7 +3785,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 0cd44c1031e13a943bb63640046fad76, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  m_UiScaleMode: 0
+  m_UiScaleMode: 1
   m_ReferencePixelsPerUnit: 100
   m_ScaleFactor: 1
   m_ReferenceResolution: {x: 800, y: 600}

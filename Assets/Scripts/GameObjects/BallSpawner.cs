@@ -32,14 +32,19 @@ public class BallSpawner : CustomMethods
     private void SpawnBall()
     {
         GameObject ballObject = objectPooler.GetInstanceFromPool();
-        ballObject.transform.position = transform.position;
+        //ballObject.transform.position = transform.position;
         Ball ball = ballObject.GetComponent<Ball>();
         if (ball != null)
         {
-            ballObject.SetActive(true);
+            //ballObject.SetActive(true);
             ball.player = player;
             activeBalls.Add(ball);
         }
+    }
+
+    private void ResetBall()
+    {
+
     }
 
     private void SpawnAdditionalBalls(int count)
@@ -58,13 +63,16 @@ public class BallSpawner : CustomMethods
     public void OnBallLost(GameObject ball)
     {
         Ball ballComponent = ball.GetComponent<Ball>();
+        //ballComponent.transform.position.y = 30;
         if (ballComponent != null)
         {
+            //activeBalls.Remove(ballComponent);
             objectPooler.ReturnInstanceToPool(ball);
             activeBalls.Remove(ballComponent);
-            Debug.Log("Perdida");
+            //Debug.Log("Perdida");
             player.currentBallsLost++;
-            if(player != null)
+            ballComponent.Stop();
+            if (player != null)
             {
                 SpawnBall();
             }

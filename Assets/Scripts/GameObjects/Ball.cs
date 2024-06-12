@@ -13,6 +13,7 @@ public class Ball : CustomMethods
     [SerializeField] private float aceY = 0f;
     [SerializeField] private float initialVelocityX = 5f;
     [SerializeField] private float initialVelocityY = 5f;
+    private float yPosGap = 1;
     private bool isMoving = false;
     private Vector2 newPos;
     private float dt;
@@ -23,12 +24,18 @@ public class Ball : CustomMethods
     public override void CustomStart()
     {
         base.CustomStart();
+
+        //isMoving = true;
+
         posX = transform.position.x;
         posY = transform.position.y;
 
         newPos = transform.position;
 
         ballSpawner = FindAnyObjectByType<BallSpawner>();
+
+        //Debug.Log(isMoving);
+        //Debug.Log(player);
     }
 
     public override void CustomUpdate()
@@ -36,13 +43,18 @@ public class Ball : CustomMethods
         base.CustomUpdate();
         dt = Time.deltaTime;
 
+        //Debug.Log(isMoving);
+        //Debug.Log(player);
+
         if (isMoving)
         {
+            //Debug.Log("ola");
             Movement(dt);
         }
         else if (player != null)
         {
             posX = player.transform.position.x;
+            posY = player.transform.position.y + yPosGap;
         }
 
         newPos.x = posX;
@@ -56,6 +68,7 @@ public class Ball : CustomMethods
     {
         if (posY < loseYPosition)
         {
+            posY = player.transform.position.y + yPosGap;
             ballSpawner.OnBallLost(gameObject);
         }
     }
@@ -69,7 +82,8 @@ public class Ball : CustomMethods
         posY += velY * delta;
 
         aceX = 0;
-        aceY = 0;       
+        aceY = 0;
+        //Debug.Log(delta);
     }
 
     public void Launch()
@@ -77,12 +91,18 @@ public class Ball : CustomMethods
         velX = initialVelocityX;
         velY = initialVelocityY;
         isMoving = true;
+        //Debug.Log("lanzada");
+        //Debug.Log(velX);
+        //Debug.Log(isMoving);
     }
 
     public void Stop()
     {
+        isMoving = false;
         velX = 0;
         velY = 0;
-        isMoving = false;
+        //Debug.Log(isMoving);
+        //Debug.Log(velX);
+        //Debug.Log(isMoving);
     }
 }
