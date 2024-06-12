@@ -1350,8 +1350,8 @@ Transform:
   m_GameObject: {fileID: 768073800}
   serializedVersion: 2
   m_LocalRotation: {x: 0.5, y: 0.5, z: -0.5, w: 0.5}
-  m_LocalPosition: {x: 35.3, y: 6.05, z: -10.53}
-  m_LocalScale: {x: 43.91, y: 1, z: 29.2}
+  m_LocalPosition: {x: 35.3, y: 5, z: -10.53}
+  m_LocalScale: {x: 43.91, y: 1, z: 58.28612}
   m_ConstrainProportionsScale: 0
   m_Children: []
   m_Father: {fileID: 1535393921}
@@ -2342,6 +2342,7 @@ MonoBehaviour:
   bricks: []
   noBricks: []
   bricksToRemove: []
+  powerUpCollider: []
 --- !u!1 &1195119719
 GameObject:
   m_ObjectHideFlags: 0
@@ -2435,7 +2436,7 @@ MonoBehaviour:
   objectPooler: {fileID: 1774973746}
   boostSpawnBalls: 2
   launchKey: 32
-  launchMultiBall: 99
+  launchMultiBall: 0
   player: {fileID: 293364022}
 --- !u!1 &1294085078
 GameObject:
@@ -3435,7 +3436,7 @@ RectTransform:
   m_GameObject: {fileID: 1708626439}
   m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
   m_LocalPosition: {x: 0, y: 0, z: 0}
-  m_LocalScale: {x: 1, y: 1, z: 1}
+  m_LocalScale: {x: 2.1844, y: 2.1844, z: 2.1844}
   m_ConstrainProportionsScale: 0
   m_Children:
   - {fileID: 1414744768}
@@ -3443,7 +3444,7 @@ RectTransform:
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
   m_AnchorMin: {x: 0.5, y: 0.5}
   m_AnchorMax: {x: 0.5, y: 0.5}
-  m_AnchoredPosition: {x: 226.14594, y: -145.4283}
+  m_AnchoredPosition: {x: 460, y: 243}
   m_SizeDelta: {x: 107.7081, y: 21.7434}
   m_Pivot: {x: 0.5, y: 0.5}
 --- !u!114 &1708626441
@@ -3636,7 +3637,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   prefab: {fileID: 8846561051536306089, guid: e380423a03ff84040b7ccc76335fbee6, type: 3}
-  poolSize: 3
+  poolSize: 1
 --- !u!1 &1914838762
 GameObject:
   m_ObjectHideFlags: 0

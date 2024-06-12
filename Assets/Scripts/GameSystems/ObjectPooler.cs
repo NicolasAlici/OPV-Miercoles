@@ -5,7 +5,7 @@ using UnityEngine;
 public class ObjectPooler : CustomMethods
 {
     [SerializeField] private GameObject prefab;
-    [SerializeField] private int poolSize = 3;
+    [SerializeField] private int poolSize;
 
     private List<GameObject> _pool;
     private GameObject _poolContainer;
@@ -43,7 +43,7 @@ public class ObjectPooler : CustomMethods
 
     public GameObject GetInstanceFromPool()
     {
-        for (int i = 0; i < _pool.Count; i++)
+            for (int i = 0; i < _pool.Count; i++)
         {
             if (!_pool[i].activeInHierarchy)
             {

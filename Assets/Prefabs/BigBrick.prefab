@@ -121,7 +121,8 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   maxBallHits: 3
   currentBallHits: 0
-  poolTag: bPool
+  powerUpPrefab: {fileID: 6187560476059523282, guid: 556f47236fb197946a9399f24bf710e3, type: 3}
+  canDropPowerUp: 1
 --- !u!259 &-288815890343670648
 LightProbeProxyVolume:
   m_ObjectHideFlags: 0

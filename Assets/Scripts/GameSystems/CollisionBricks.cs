@@ -11,26 +11,24 @@ public class CollisionBricks : CustomMethods
     [SerializeField] private List<BoxCollider> bricks;
     [SerializeField] private List<BoxCollider> noBricks;
     [SerializeField] private List<BoxCollider> bricksToRemove;
-    
+    [SerializeField] private List<BoxCollider> powerUpCollider;
+    [SerializeField] private List<BoxCollider> powerUpToRemove;
+    [SerializeField] private List<BoxCollider> player;    
     private Dictionary<BoxCollider, GameObject> _bricksDictionary;
 
     private Vector2 firstVector;
     private Vector2 secondVector;
     private Vector2 thirdVector;
     private Vector2 fourthVector;
-
-    //private Vector2 ballPosition;
-    //private Vector2 ballVelocity;
-    //private Vector2 brickPosition;
-    //private Vector2 collisionNormal;
-    //private Vector2 reflectedVelocity;
-
     public override void CustomStart()
     {
         base.CustomStart();
         bricks = new List<BoxCollider>();
         noBricks = new List<BoxCollider>();
         bricksToRemove = new List<BoxCollider>();
+        powerUpCollider = new List<BoxCollider>();
+        powerUpToRemove = new List<BoxCollider>();
+        player = new List<BoxCollider>();
         _bricksDictionary = new Dictionary<BoxCollider, GameObject>();
         balls = new List<Ball>();
         ballColliders = new List<BoxCollider>();
@@ -150,6 +148,33 @@ public class CollisionBricks : CustomMethods
                 }
             }
         }
+
+
+        // //MultiBallPowerUp Collision
+        // foreach (BoxCollider powerUp in powerUpCollider)
+        // {
+        //     foreach (BoxCollider playerCollider in player)
+        //     {
+        //         Ball ball = balls[ballColliders.IndexOf(playerCollider)];
+        //         if (RectCollision(ball, playerCollider, powerUp))
+        //         {
+        //             powerUpCollider.Add(powerUp);
+        //         }
+        //     }
+        // }
+
+        // foreach (BoxCollider powerUp in powerUpToRemove)
+        // {
+        //     powerUpCollider.Remove(powerUp);
+        //     if (_bricksDictionary.TryGetValue(powerUp, out GameObject nobrickObject))
+        //     {
+        //         Bricks brickComponent = nobrickObject.GetComponent<Bricks>();
+        //         if (brickComponent != null)
+        //         {
+        //             brickComponent.DestroyBrick(nobrickObject);
+        //         }
+        //     }
+        // }
     }
 
     private bool RectCollision(Ball ball, BoxCollider ballCollider, BoxCollider brickCollider)
@@ -161,9 +186,6 @@ public class CollisionBricks : CustomMethods
             ballCollider.bounds.max.y >= brickCollider.bounds.min.y &&
             ballCollider.bounds.min.y <= brickCollider.bounds.max.y)
         {
-            //ballPosition = ball.transform.position;
-            //brickPosition = brickCollider.transform.position;
-            //collisionNormal = Vector2.zero;
 
             float overlapLeft = ballCollider.bounds.max.x - brickCollider.bounds.min.x;
             float overlapRight = brickCollider.bounds.max.x - ballCollider.bounds.min.x;
@@ -206,7 +228,6 @@ public class CollisionBricks : CustomMethods
                 ball.transform.position = fourthVector;
             }
 
-            //Debug.Log(brickCollider.gameObject.name);
             return true; // Return true indicating a collision occurred
         }
         return false; // No collision

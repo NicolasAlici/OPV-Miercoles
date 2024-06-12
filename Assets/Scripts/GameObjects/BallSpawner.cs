@@ -8,13 +8,12 @@ public class BallSpawner : CustomMethods
     [SerializeField] private int boostSpawnBalls = 2;
     private List<Ball> activeBalls = new List<Ball>();
     [SerializeField] private KeyCode launchKey = KeyCode.Space;
-    [SerializeField] private KeyCode launchMultiBall = KeyCode.C;
+    public bool launchMultiBall;
     [SerializeField] private Player player;
 
     public override void CustomAwake()
     {
         base.CustomAwake();
-        //player = GetComponent<Player>();
         SpawnBall();
     }
 
@@ -28,10 +27,10 @@ public class BallSpawner : CustomMethods
                 ball.Launch();
             }
         }
-        if(Input.GetKeyDown(launchMultiBall))
-        {
-            OnBallCollectedBoost();
-        }
+        // if(launchMultiBall == true && activeBalls.Count <= 3 && activeBalls.Count >= 1)
+        // {
+        //     OnBallCollectedBoost();
+        // }
     }
 
     private void SpawnBall()
@@ -55,7 +54,11 @@ public class BallSpawner : CustomMethods
 
     public void OnBallCollectedBoost()
     {
-        SpawnAdditionalBalls(boostSpawnBalls);
+        if(launchMultiBall == true && activeBalls.Count <= 3 && activeBalls.Count >= 1)
+        {
+            SpawnAdditionalBalls(boostSpawnBalls);
+        }
+        
     }
 
     public void OnBallLost(GameObject ball)
@@ -65,7 +68,6 @@ public class BallSpawner : CustomMethods
         {
             objectPooler.ReturnInstanceToPool(ball);
             activeBalls.Remove(ballComponent);
-            //player.currentBallsLost++;
             ballComponent.Stop();
 
             if (activeBalls.Count <= 0)
@@ -76,12 +78,6 @@ public class BallSpawner : CustomMethods
                     SpawnBall();
                 }
             }
-
-            //if (player != null)
-            //{
-            //    SpawnBall();
-            //}
         }
-        // Agregar método para sacar una vida al jugador y chequear para crear una nueva bola si no
     }
 }
