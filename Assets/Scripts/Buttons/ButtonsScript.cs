@@ -23,8 +23,6 @@ public class ButtonsScript : CustomMethods
 
     public void ShowCredits()
     {
-
+        SceneManager.LoadScene("CreditsScene");
     }
-
-    
 }
