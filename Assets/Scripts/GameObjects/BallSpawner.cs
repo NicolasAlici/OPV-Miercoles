@@ -27,10 +27,6 @@ public class BallSpawner : CustomMethods
                 ball.Launch();
             }
         }
-        // if(launchMultiBall == true && activeBalls.Count <= 3 && activeBalls.Count >= 1)
-        // {
-        //     OnBallCollectedBoost();
-        // }
     }
 
     private void SpawnBall()

@@ -8,11 +8,13 @@ public class MultiBallPowerUp : CustomMethods
     [SerializeField] private float targetYPosition = -5f;
 
     private bool _isFalling = false;
+    private CollisionBricks _collisionBricks;
+    private BallSpawner _ballSpawner;
 
-    public override void CustomAwake()
+    public override void CustomStart()
     {
-        base.CustomAwake();
-        CustomUpdateManager.Instance.AddToMethodsList(this);
+        base.CustomStart();
+        _collisionBricks = FindObjectOfType<CollisionBricks>();
     }
 
     public override void CustomUpdate()
@@ -21,6 +23,22 @@ public class MultiBallPowerUp : CustomMethods
         if (_isFalling)
         {
             transform.position += Vector3.down * fallSpeed * Time.deltaTime;
+
+            if (_collisionBricks != null)
+            {
+                foreach (var playerCollider in _collisionBricks.noBricks)
+                {
+                    if (playerCollider.bounds.Intersects(GetComponent<BoxCollider>().bounds))
+                    {
+                        _collisionBricks.SpawnMultiBalls();
+                        Destroy(gameObject);
+                    }
+                    else
+                    {
+                        _ballSpawner.launchMultiBall = false;
+                    }
+                }
+            }
 
             if (transform.position.y <= targetYPosition)
             {

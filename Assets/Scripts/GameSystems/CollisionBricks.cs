@@ -9,17 +9,20 @@ public class CollisionBricks : CustomMethods
     [SerializeField] private List<Ball> balls;
     [SerializeField] private List<BoxCollider> ballColliders;
     [SerializeField] private List<BoxCollider> bricks;
-    [SerializeField] private List<BoxCollider> noBricks;
+    public List<BoxCollider> noBricks;
     [SerializeField] private List<BoxCollider> bricksToRemove;
     [SerializeField] private List<BoxCollider> powerUpCollider;
     [SerializeField] private List<BoxCollider> powerUpToRemove;
-    [SerializeField] private List<BoxCollider> player;    
+    [SerializeField] private List<BoxCollider> player;   
     private Dictionary<BoxCollider, GameObject> _bricksDictionary;
 
     private Vector2 firstVector;
     private Vector2 secondVector;
     private Vector2 thirdVector;
     private Vector2 fourthVector;
+
+    private BallSpawner _ballSpawner;
+
     public override void CustomStart()
     {
         base.CustomStart();
@@ -28,15 +31,16 @@ public class CollisionBricks : CustomMethods
         bricksToRemove = new List<BoxCollider>();
         powerUpCollider = new List<BoxCollider>();
         powerUpToRemove = new List<BoxCollider>();
-        player = new List<BoxCollider>();
+        player = new List<BoxCollider>();   
         _bricksDictionary = new Dictionary<BoxCollider, GameObject>();
         balls = new List<Ball>();
         ballColliders = new List<BoxCollider>();
+        _ballSpawner = FindObjectOfType<BallSpawner>();
 
-        GridManager.gridGenerated += UpdateBricks; // Subscribe to the event
-        UpdateBricks(); // Initialize bricks if already present in the scene
+        GridManager.gridGenerated += UpdateBricks;
+        UpdateBricks();
         UpdateNoBricks();
-        FindBallInstances(); // Find the ball instances in the scene
+        FindBallInstances();
 
         for (int i = 0; i < bricks.Count; i++)
         {
@@ -47,7 +51,7 @@ public class CollisionBricks : CustomMethods
 
     private void UpdateBricks()
     {
-        bricks.Clear(); // Clear the list before updating
+        bricks.Clear();
         GameObject[] brickObjects = GameObject.FindGameObjectsWithTag("Brick");
 
         foreach (GameObject brickObject in brickObjects)
@@ -63,7 +67,7 @@ public class CollisionBricks : CustomMethods
 
     private void UpdateNoBricks()
     {
-        noBricks.Clear(); // Clear the list before updating
+        noBricks.Clear();
         GameObject[] noBrickObjects = GameObject.FindGameObjectsWithTag("NoBrick");
 
         foreach (GameObject noBrickObject in noBrickObjects)
@@ -78,7 +82,6 @@ public class CollisionBricks : CustomMethods
 
     private void FindBallInstances()
     {
-        //Debug.Log("buscando");
         balls.Clear();
         ballColliders.Clear();
         GameObject[] ballObjects = GameObject.FindGameObjectsWithTag("Ball");
@@ -93,11 +96,6 @@ public class CollisionBricks : CustomMethods
                 ballColliders.Add(ballColliderInstance);
             }
         }
-
-        if (balls.Count == 0)
-        {
-            Debug.LogWarning("No ball instances found in the scene!");
-        }
     }
 
     public override void CustomFixedUpdate()
@@ -108,10 +106,10 @@ public class CollisionBricks : CustomMethods
         if (balls.Count == 0 || ballColliders.Count == 0)
         {
             FindBallInstances();
-            if (balls.Count == 0 || ballColliders.Count == 0) return; // Ensure we have valid ball instances
+            if (balls.Count == 0 || ballColliders.Count == 0) return;
         }
 
-        bricksToRemove.Clear(); // Clear the list before updating
+        bricksToRemove.Clear();
 
         foreach (BoxCollider brick in bricks)
         {
@@ -135,7 +133,7 @@ public class CollisionBricks : CustomMethods
             }
         }
 
-        // Remove bricks that were collided with
+        
         foreach (BoxCollider brick in bricksToRemove)
         {
             bricks.Remove(brick);
@@ -148,33 +146,6 @@ public class CollisionBricks : CustomMethods
                 }
             }
         }
-
-
-        // //MultiBallPowerUp Collision
-        // foreach (BoxCollider powerUp in powerUpCollider)
-        // {
-        //     foreach (BoxCollider playerCollider in player)
-        //     {
-        //         Ball ball = balls[ballColliders.IndexOf(playerCollider)];
-        //         if (RectCollision(ball, playerCollider, powerUp))
-        //         {
-        //             powerUpCollider.Add(powerUp);
-        //         }
-        //     }
-        // }
-
-        // foreach (BoxCollider powerUp in powerUpToRemove)
-        // {
-        //     powerUpCollider.Remove(powerUp);
-        //     if (_bricksDictionary.TryGetValue(powerUp, out GameObject nobrickObject))
-        //     {
-        //         Bricks brickComponent = nobrickObject.GetComponent<Bricks>();
-        //         if (brickComponent != null)
-        //         {
-        //             brickComponent.DestroyBrick(nobrickObject);
-        //         }
-        //     }
-        // }
     }
 
     private bool RectCollision(Ball ball, BoxCollider ballCollider, BoxCollider brickCollider)
@@ -228,9 +199,9 @@ public class CollisionBricks : CustomMethods
                 ball.transform.position = fourthVector;
             }
 
-            return true; // Return true indicating a collision occurred
+            return true;
         }
-        return false; // No collision
+        return false;
     }
 
     private void RectCollisionNoBrick(Ball ball, BoxCollider ballCollider, BoxCollider noBrickCollider)
@@ -281,6 +252,15 @@ public class CollisionBricks : CustomMethods
                 fourthVector.y = noBrickCollider.bounds.max.y + ballCollider.bounds.extents.y + 0.01f;
                 ball.transform.position = fourthVector;
             }
+        }
+    }
+
+    public void SpawnMultiBalls()
+    {
+        if (_ballSpawner != null)
+        {
+            _ballSpawner.launchMultiBall = true;
+            _ballSpawner.OnBallCollectedBoost();
         }
     }
 }

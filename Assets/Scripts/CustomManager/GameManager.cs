@@ -1,6 +1,7 @@
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
+using UnityEngine.SceneManagement;
 
 public class GameManager : CustomMethods
 {
@@ -46,6 +47,11 @@ public class GameManager : CustomMethods
         Time.timeScale = 0;
         Cursor.lockState = CursorLockMode.None;
         Cursor.visible = true;
+    }
+
+    public void goMenu()
+    {
+
     }
 
 }
