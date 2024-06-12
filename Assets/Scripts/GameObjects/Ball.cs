@@ -25,17 +25,12 @@ public class Ball : CustomMethods
     {
         base.CustomStart();
 
-        //isMoving = true;
-
         posX = transform.position.x;
         posY = transform.position.y;
 
         newPos = transform.position;
 
         ballSpawner = FindAnyObjectByType<BallSpawner>();
-
-        //Debug.Log(isMoving);
-        //Debug.Log(player);
     }
 
     public override void CustomUpdate()
@@ -43,12 +38,8 @@ public class Ball : CustomMethods
         base.CustomUpdate();
         dt = Time.deltaTime;
 
-        //Debug.Log(isMoving);
-        //Debug.Log(player);
-
         if (isMoving)
         {
-            //Debug.Log("ola");
             Movement(dt);
         }
         else if (player != null)
@@ -83,17 +74,13 @@ public class Ball : CustomMethods
 
         aceX = 0;
         aceY = 0;
-        //Debug.Log(delta);
     }
 
     public void Launch()
     {
-        velX = initialVelocityX;
+        velX = Random.Range(-initialVelocityX, initialVelocityX);
         velY = initialVelocityY;
         isMoving = true;
-        //Debug.Log("lanzada");
-        //Debug.Log(velX);
-        //Debug.Log(isMoving);
     }
 
     public void Stop()
@@ -101,8 +88,5 @@ public class Ball : CustomMethods
         isMoving = false;
         velX = 0;
         velY = 0;
-        //Debug.Log(isMoving);
-        //Debug.Log(velX);
-        //Debug.Log(isMoving);
     }
 }

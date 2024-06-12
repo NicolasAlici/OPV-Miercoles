@@ -8,6 +8,7 @@ public class BallSpawner : CustomMethods
     [SerializeField] private int boostSpawnBalls = 2;
     private List<Ball> activeBalls = new List<Ball>();
     [SerializeField] private KeyCode launchKey = KeyCode.Space;
+    [SerializeField] private KeyCode launchMultiBall = KeyCode.C;
     [SerializeField] private Player player;
 
     public override void CustomAwake()
@@ -27,24 +28,21 @@ public class BallSpawner : CustomMethods
                 ball.Launch();
             }
         }
+        if(Input.GetKeyDown(launchMultiBall))
+        {
+            OnBallCollectedBoost();
+        }
     }
 
     private void SpawnBall()
     {
         GameObject ballObject = objectPooler.GetInstanceFromPool();
-        //ballObject.transform.position = transform.position;
         Ball ball = ballObject.GetComponent<Ball>();
         if (ball != null)
         {
-            //ballObject.SetActive(true);
             ball.player = player;
             activeBalls.Add(ball);
         }
-    }
-
-    private void ResetBall()
-    {
-
     }
 
     private void SpawnAdditionalBalls(int count)
@@ -63,13 +61,10 @@ public class BallSpawner : CustomMethods
     public void OnBallLost(GameObject ball)
     {
         Ball ballComponent = ball.GetComponent<Ball>();
-        //ballComponent.transform.position.y = 30;
         if (ballComponent != null)
         {
-            //activeBalls.Remove(ballComponent);
             objectPooler.ReturnInstanceToPool(ball);
             activeBalls.Remove(ballComponent);
-            //Debug.Log("Perdida");
             player.currentBallsLost++;
             ballComponent.Stop();
             if (player != null)

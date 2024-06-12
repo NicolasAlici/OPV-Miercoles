@@ -80,6 +80,7 @@ public class CollisionBricks : CustomMethods
 
     private void FindBallInstances()
     {
+        //Debug.Log("buscando");
         balls.Clear();
         ballColliders.Clear();
         GameObject[] ballObjects = GameObject.FindGameObjectsWithTag("Ball");
@@ -105,6 +106,7 @@ public class CollisionBricks : CustomMethods
     {
         base.CustomFixedUpdate();
 
+        FindBallInstances();
         if (balls.Count == 0 || ballColliders.Count == 0)
         {
             FindBallInstances();
@@ -204,7 +206,7 @@ public class CollisionBricks : CustomMethods
                 ball.transform.position = fourthVector;
             }
 
-            Debug.Log(brickCollider.gameObject.name);
+            //Debug.Log(brickCollider.gameObject.name);
             return true; // Return true indicating a collision occurred
         }
         return false; // No collision

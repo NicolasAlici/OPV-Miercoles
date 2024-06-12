@@ -49,12 +49,8 @@ public class Bricks : CustomMethods
 
     public void DestroyBrick(GameObject brick)
     {
-        Debug.Log("BRICK " + brick != null);
-        Debug.Log("PILETAAAAAAAAAAAA " + _pool != null);
+        //Debug.Log("BRICK " + brick != null);
+        //Debug.Log("PILETAAAAAAAAAAAA " + _pool != null);
         _pool.ReturnInstanceToPool(brick);
-        if(brick == null)
-        {
-
-        }
     }
 }

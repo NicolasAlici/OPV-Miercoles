@@ -17,12 +17,10 @@ public class Player : CustomMethods
 
     private float dt;
     private Vector2 newPos;
-    //private GameManager gameManager;
 
     public override void CustomStart()
     {
         base.CustomStart();
-        //gameManager = GetComponent<GameManager>();
         posX = transform.position.x;
         newPos = transform.position;
     }

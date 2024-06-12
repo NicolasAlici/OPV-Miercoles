@@ -903,7 +903,7 @@ GameObject:
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
-  m_IsActive: 1
+  m_IsActive: 0
 --- !u!224 &558818222
 RectTransform:
   m_ObjectHideFlags: 0
@@ -2435,6 +2435,7 @@ MonoBehaviour:
   objectPooler: {fileID: 1774973746}
   boostSpawnBalls: 2
   launchKey: 32
+  launchMultiBall: 99
   player: {fileID: 293364022}
 --- !u!1 &1294085078
 GameObject:
@@ -3635,7 +3636,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   prefab: {fileID: 8846561051536306089, guid: e380423a03ff84040b7ccc76335fbee6, type: 3}
-  poolSize: 1
+  poolSize: 3
 --- !u!1 &1914838762
 GameObject:
   m_ObjectHideFlags: 0
@@ -3735,7 +3736,7 @@ GameObject:
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
-  m_IsActive: 1
+  m_IsActive: 0
 --- !u!224 &2120245611
 RectTransform:
   m_ObjectHideFlags: 0
