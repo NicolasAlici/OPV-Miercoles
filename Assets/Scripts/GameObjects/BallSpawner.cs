@@ -65,12 +65,22 @@ public class BallSpawner : CustomMethods
         {
             objectPooler.ReturnInstanceToPool(ball);
             activeBalls.Remove(ballComponent);
-            player.currentBallsLost++;
+            //player.currentBallsLost++;
             ballComponent.Stop();
-            if (player != null)
+
+            if (activeBalls.Count <= 0)
             {
-                SpawnBall();
+                player.currentBallsLost++;
+                if (player != null)
+                {
+                    SpawnBall();
+                }
             }
+
+            //if (player != null)
+            //{
+            //    SpawnBall();
+            //}
         }
         // Agregar método para sacar una vida al jugador y chequear para crear una nueva bola si no
     }
