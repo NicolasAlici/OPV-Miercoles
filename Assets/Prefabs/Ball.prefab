@@ -106,7 +106,7 @@ MonoBehaviour:
   aceX: 0
   aceY: 0
   initialVelocityX: 5
-  initialVelocityY: 5
+  initialVelocityY: 10
   loseYPosition: -5
 --- !u!65 &705816186968136287
 BoxCollider:
