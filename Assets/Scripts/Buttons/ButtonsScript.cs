@@ -21,5 +21,10 @@ public class ButtonsScript : CustomMethods
         Application.Quit();
     }
 
+    public void ShowCredits()
+    {
+
+    }
+
     
 }
