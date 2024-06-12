@@ -33,6 +33,15 @@ public class GameManager : CustomMethods
         Cursor.visible = false;
     }
 
+    public override void CustomUpdate()
+    {
+        base.CustomUpdate();
+        if(Input.GetKey(KeyCode.P))
+        {
+            goMenu();
+        }
+    }
+
     public void gameLose()
     {
         loseCanvas.SetActive(true);
@@ -51,7 +60,10 @@ public class GameManager : CustomMethods
 
     public void goMenu()
     {
-
+        Time.timeScale = 0;
+        Cursor.lockState = CursorLockMode.None;
+        Cursor.visible = true;
+        SceneManager.LoadScene("MainMenu");
     }
 
 }
