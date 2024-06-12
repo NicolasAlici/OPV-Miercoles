@@ -59,8 +59,10 @@ SpriteAtlas:
     - 597708f66da387a42a1480e3958357f3: 21300000
     - 48895d57153e19140827eaf12fa927d3: 21300000
     - 1af1d6d96a4381b4a887e330658c245b: 21300000
+    - 34504a6b0a58c0a4eb0859e738ef8efe: 21300000
     - be1ee81d2c4460143b24f6f502899612: 21300000
     - 6a21a43eb74e10242b292925ccf4586c: 21300000
+    - aac9c7fffd7b7c84fae9e62c87ff58c1: 21300000
     - f42889ffb82f62640997eae7c4cd57b1: 21300000
   m_MasterAtlas: {fileID: 0}
   m_PackedSprites:
@@ -73,8 +75,10 @@ SpriteAtlas:
   - {fileID: 21300000, guid: 597708f66da387a42a1480e3958357f3, type: 3}
   - {fileID: 21300000, guid: 48895d57153e19140827eaf12fa927d3, type: 3}
   - {fileID: 21300000, guid: 1af1d6d96a4381b4a887e330658c245b, type: 3}
+  - {fileID: 21300000, guid: 34504a6b0a58c0a4eb0859e738ef8efe, type: 3}
   - {fileID: 21300000, guid: be1ee81d2c4460143b24f6f502899612, type: 3}
   - {fileID: 21300000, guid: 6a21a43eb74e10242b292925ccf4586c, type: 3}
+  - {fileID: 21300000, guid: aac9c7fffd7b7c84fae9e62c87ff58c1, type: 3}
   - {fileID: 21300000, guid: f42889ffb82f62640997eae7c4cd57b1, type: 3}
   m_PackedSpriteNamesToIndex:
   - victory
@@ -86,8 +90,10 @@ SpriteAtlas:
   - boton
   - credits
   - arkanoid
+  - controles1
   - fondo victoria
   - main menu
+  - controles2
   - defeat
   m_RenderDataMap: {}
   m_Tag: UiAtlas
