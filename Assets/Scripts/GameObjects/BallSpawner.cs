@@ -8,7 +8,6 @@ public class BallSpawner : CustomMethods
     [SerializeField] private int boostSpawnBalls = 2;
     private List<Ball> activeBalls = new List<Ball>();
     [SerializeField] private KeyCode launchKey = KeyCode.Space;
-    public bool launchMultiBall;
     [SerializeField] private Player player;
 
     public override void CustomAwake()
@@ -50,7 +49,7 @@ public class BallSpawner : CustomMethods
 
     public void OnBallCollectedBoost()
     {
-        if(launchMultiBall == true && activeBalls.Count <= 3 && activeBalls.Count >= 1)
+        if(activeBalls.Count <= 3 && activeBalls.Count >= 1)
         {
             SpawnAdditionalBalls(boostSpawnBalls);
         }

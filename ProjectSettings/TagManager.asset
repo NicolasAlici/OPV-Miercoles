@@ -12,6 +12,8 @@ TagManager:
   - mPool
   - bPool
   - PowerUp
+  - BallSpawner
+  - GameManager
   layers:
   - Default
   - TransparentFX

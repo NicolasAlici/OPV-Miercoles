@@ -851,7 +851,7 @@ GameObject:
   - component: {fileID: 358873490}
   m_Layer: 0
   m_Name: GameManager
-  m_TagString: Untagged
+  m_TagString: GameManager
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
@@ -1480,6 +1480,11 @@ MonoBehaviour:
   columns: 3
   spacingX: 1.8
   spacingY: 1.1
+--- !u!65 &816046732 stripped
+BoxCollider:
+  m_CorrespondingSourceObject: {fileID: 7763359574734133293, guid: ebf689a80bc07b94bb747a2f01d0f096, type: 3}
+  m_PrefabInstance: {fileID: 293364021}
+  m_PrefabAsset: {fileID: 0}
 --- !u!1 &836155665
 GameObject:
   m_ObjectHideFlags: 0
@@ -2338,13 +2343,14 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   ballPrefab: {fileID: 8846561051536306089, guid: e380423a03ff84040b7ccc76335fbee6, type: 3}
   balls: []
+  powerUp: []
   ballColliders: []
   bricks: []
   noBricks: []
   bricksToRemove: []
   powerUpCollider: []
   powerUpToRemove: []
-  player: []
+  player: {fileID: 816046732}
 --- !u!1 &1195119719
 GameObject:
   m_ObjectHideFlags: 0
@@ -2403,7 +2409,7 @@ GameObject:
   - component: {fileID: 1242600106}
   m_Layer: 0
   m_Name: SpawnBalls
-  m_TagString: Untagged
+  m_TagString: BallSpawner
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
@@ -2438,7 +2444,6 @@ MonoBehaviour:
   objectPooler: {fileID: 1774973746}
   boostSpawnBalls: 2
   launchKey: 32
-  launchMultiBall: 0
   player: {fileID: 293364022}
 --- !u!1 &1294085078
 GameObject:

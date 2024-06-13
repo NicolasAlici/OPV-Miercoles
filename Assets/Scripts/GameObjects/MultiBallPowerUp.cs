@@ -17,6 +17,12 @@ public class MultiBallPowerUp : CustomMethods
         {
             transform.position += Vector3.down * fallSpeed * Time.deltaTime;
         }
+
+        if(transform.position.y <= targetYPosition)
+        {
+            CustomUpdateManager.Instance.RemoveFromMethodsList(this);
+            Destroy(gameObject);
+        }
     }
 
     public void ActivatePowerUp(Vector3 spawnPosition)
@@ -29,11 +35,7 @@ public class MultiBallPowerUp : CustomMethods
     public void RemovePowerUp(GameObject powerUpPill)
     {
         MultiBallPowerUp powerUpComponent = powerUpPill.GetComponent<MultiBallPowerUp>();
-        if (powerUpComponent.transform.position.y <= targetYPosition)
-        {
-            powerUpComponent._isFalling = false;
-            CustomUpdateManager.Instance.RemoveFromMethodsList(powerUpComponent);
-            Destroy(powerUpComponent);
-        }
+        CustomUpdateManager.Instance.RemoveFromMethodsList(powerUpComponent);
+        Destroy(powerUpPill);
     }
 }
