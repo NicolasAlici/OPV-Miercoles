@@ -135,7 +135,7 @@ public class CollisionBricks : CustomMethods
             if (_powerUpDictionary.TryGetValue(powerUpCol, out GameObject powerUpObject))
             {
                 MultiBallPowerUp powerUpComponent = powerUpObject.GetComponent<MultiBallPowerUp>();
-                if (powerUpComponent != null)
+                if ((powerUpComponent != null) && balls.Count == 1)
                 {
                     _ballSpawner.OnBallCollectedBoost();
                     powerUpComponent.RemovePowerUp(powerUpObject);
