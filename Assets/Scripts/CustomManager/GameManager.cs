@@ -22,11 +22,13 @@ public class GameManager : CustomMethods
 
     public GameObject winCanvas;
     public GameObject loseCanvas;
+    public GameObject uICamvas;
 
     public override void CustomStart()
     {
         base.CustomStart();
         Time.timeScale = 1;
+        uICamvas.SetActive(true);
         winCanvas.SetActive(false);
         loseCanvas.SetActive(false);
         Cursor.lockState = CursorLockMode.None;
@@ -45,6 +47,7 @@ public class GameManager : CustomMethods
     public void gameLose()
     {
         loseCanvas.SetActive(true);
+        uICamvas.SetActive(false);
         Time.timeScale = 0;
         Cursor.lockState = CursorLockMode.None;
         Cursor.visible = true;
@@ -53,6 +56,7 @@ public class GameManager : CustomMethods
     public void gameWon()
     {
         winCanvas.SetActive(true);
+        uICamvas.SetActive(false);
         Time.timeScale = 0;
         Cursor.lockState = CursorLockMode.None;
         Cursor.visible = true;
